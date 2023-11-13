@@ -1,0 +1,1 @@
+Start-Process -FilePath "adb" -ArgumentList "-a nodaemon server start" -NoNewWindow -Detached

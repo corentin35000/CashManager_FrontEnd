@@ -10,7 +10,7 @@ RUN npm install
 COPY . .
 
 # Stage 2: Final stage combining Node.js, Java and Rust environments
-FROM debian:12.2-slim as runtime
+FROM ubuntu:22.04 as runtime
 
 # Installer les prérequis for Node.js
 RUN apt-get update && \
@@ -75,6 +75,4 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
 ENV PATH="/root/.cargo/bin:$PATH"
 
-RUN npm run rust:install:target:linux && \
-    npm run rust:install:target:android && \
-    npm run tauri android init
+RUN npm run rust:install:target:android

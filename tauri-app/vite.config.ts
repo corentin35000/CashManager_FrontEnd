@@ -18,14 +18,15 @@ export default defineConfig(async () => ({
     port: 1420,
     strictPort: true,
     hmr: mobile
-        ? {
-          protocol: 'ws',
-          host: await internalIpV4(),
-          port: 1421,
+        ?
+        {
+            protocol: 'ws',
+            host: await internalIpV4(),
+            port: 1421,
         }
         :
         {
-          clientPort: 1420
+            clientPort: 1420
         },
     watch: {
       usePolling: true

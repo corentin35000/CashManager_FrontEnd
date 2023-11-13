@@ -1,4 +1,4 @@
-# Cash Manager
+# Project - Cash Manager
 
 Infos IMPORTANT : Les version du protocole ADB doit correspondre côté hote et dans le container ! Pas obligatoirement la version de ADB mais la version du protocole ADB.
 
@@ -12,12 +12,13 @@ Infos IMPORTANT : Les version du protocole ADB doit correspondre côté hote et 
 ## Cycle Development
 1. Run commands :
 ```bash
-adb kill-server
-adb -a nodaemon server start
-adb devices # optional: check if device connected to host
-
-docker-compose up
+npm run run-stack-windows
 ```
+2. Debug Application Android :
+   - Go to : chrome://inspect/#devices
+   - Click button "Configure"
+   - Add host : 0.0.0.0:1421
+   - Cocher enable port forwarding
 
 <br /><br /><br /><br />
 
