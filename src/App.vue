@@ -1,12 +1,8 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Greet from "./components/Greet.vue";
-</script>
-
 <template>
   <div class="container">
     <h1>Welcome to Tauri!</h1>
+
+    <div id="reader" width="600px"></div>
 
     <div class="row">
       <a href="https://vitejs.dev" target="_blank">
@@ -40,6 +36,34 @@ import Greet from "./components/Greet.vue";
     <Greet />
   </div>
 </template>
+
+<script setup lang="ts">
+import { Html5QrcodeScanner } from 'html5-qrcode'
+import Greet from "./components/Greet.vue";
+import {onMounted} from "vue";
+
+function onScanSuccess(decodedText, decodedResult) {
+  // handle the scanned code as you like, for example:
+  console.log(`Code matched = ${decodedText}`, decodedResult);
+}
+
+function onScanFailure(error) {
+  // handle scan failure, usually better to ignore and keep scanning.
+  // for example:
+  console.warn(`Code scan error = ${error}`);
+}
+
+onMounted(() => {
+  console.log('mounted')
+
+  let html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 60, qrbox: { width: 250, height: 250} },
+      /* verbose= */ false);
+
+  html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+})
+</script>
 
 <style scoped>
 .logo.vite:hover {

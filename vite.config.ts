@@ -22,7 +22,7 @@ export default defineConfig(async () => ({
         {
             protocol: 'ws',
             host: await internalIpV4(),
-            port: 1421,
+            port: 1421
         }
         :
         {
