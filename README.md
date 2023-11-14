@@ -13,7 +13,11 @@
 ## Cycle Development
 1. Run commands :
    ```bash
+   # Windows
    npm run run:stack:windows
+   
+   # Unix
+   npm run run:stack:unix
    ```
 2. Debug Application Android :
    - Go to : chrome://inspect/#devices
