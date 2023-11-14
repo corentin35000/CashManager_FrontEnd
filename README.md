@@ -1,6 +1,13 @@
 # Project - Cash Manager
 
 ## Setup Environment
+### Web :
+1. Run command :
+   ```bash
+   npm install
+   ```
+
+### Android :
 1. Download and Install ADB : https://developer.android.com/studio/releases/platform-tools?hl=fr
 2. Add ADB in PATH ENVIRONMENT
 3. Run command :
@@ -11,6 +18,13 @@
 
 
 ## Cycle Development
+### Web :
+1. Run command :
+   ```bash
+   npm run dev
+   ```
+
+### Android : 
 1. Run commands :
    ```bash
    # Windows

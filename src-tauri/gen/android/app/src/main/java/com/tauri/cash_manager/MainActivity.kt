@@ -1,3 +1,3 @@
-package com.tauri.tauri_app
+package com.tauri.cash_manager
 
 class MainActivity : TauriActivity()

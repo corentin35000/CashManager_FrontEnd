@@ -420,6 +420,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "cash-manager"
+version = "0.0.0"
+dependencies = [
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-shell",
+ "tauri-plugin-window",
+]
+
+[[package]]
 name = "cc"
 version = "1.0.84"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3348,17 +3359,6 @@ dependencies = [
  "webview2-com",
  "window-vibrancy",
  "windows 0.51.1",
-]
-
-[[package]]
-name = "tauri-app"
-version = "0.0.0"
-dependencies = [
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-shell",
- "tauri-plugin-window",
 ]
 
 [[package]]
