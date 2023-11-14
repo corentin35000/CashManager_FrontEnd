@@ -4,11 +4,14 @@
   "type": "module",
   "version": "0.0.0",
   "scripts": {
+    "typecheck": "vue-tsc --noEmit",
     "dev": "vite dev --port 1420",
     "dev:android": "npm run tauri android dev",
+    "build:tauri:android": "npm run tauri android build",
+    "build:vite:develop": "npm run typecheck && vite build --mode development",
+    "build:vite:prod": "npm run typecheck && vite build --mode production",
     "run:stack:windows": "sh build-scripts/run-stack-windows.sh",
     "run:stack:unix": "sh build-scripts/run-stack-unix.sh",
-    "build": "vue-tsc --noEmit && vite build",
     "tauri": "tauri",
     "rust:install:target:android": "rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android"
   },

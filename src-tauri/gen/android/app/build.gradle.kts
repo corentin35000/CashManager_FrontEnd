@@ -6,10 +6,10 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace = "com.tauri.cash_manager"
+    namespace = "com.cash.cash_manager"
     defaultConfig {
         manifestPlaceholders["usesCleartextTraffic"] = "false"
-        applicationId = "com.tauri.cash_manager"
+        applicationId = "com.cash.cash_manager"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
