@@ -1,5 +1,16 @@
 # Project - Cash Manager
 
+## <span style="color: green;"> Tech Stack 🛠</span>
+
+- Vue.js (framework front-end)
+- Vite (bundler)
+- NodeJS (environnement)
+- CI / CD (GitHub actions)
+- Docker / Docker Compose
+
+<br /><br /><br /><br />
+
+
 ## Setup Environment
 ### Web :
 1. Run command :
