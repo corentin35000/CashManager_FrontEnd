@@ -1,19 +1,20 @@
 # Project - Cash Manager
 
-Infos IMPORTANT : Les version du protocole ADB doit correspondre côté hote et dans le container ! Pas obligatoirement la version de ADB mais la version du protocole ADB.
-
 ## Setup Environment
 1. Download and Install ADB : https://developer.android.com/studio/releases/platform-tools?hl=fr
 2. Add ADB in PATH ENVIRONMENT
-
+3. Run command :
+   ```bash
+   npm install
+   ```
 <br /><br /><br /><br />
 
 
 ## Cycle Development
 1. Run commands :
-```bash
-npm run run-stack-windows
-```
+   ```bash
+   npm run run:stack:windows
+   ```
 2. Debug Application Android :
    - Go to : chrome://inspect/#devices
    - Click button "Configure"

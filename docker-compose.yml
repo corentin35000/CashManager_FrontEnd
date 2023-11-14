@@ -19,7 +19,7 @@ services:
     volumes:
       - .:/app
       - node_modules:/app/node_modules
-    command: npm run tauri android dev
+    command: npm run dev:android
     networks:
       - app-network
 

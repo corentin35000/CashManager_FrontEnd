@@ -5,11 +5,12 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite dev --port 1420",
+    "dev:android": "npm run tauri android dev",
+    "run:stack:windows": "sh build-scripts/run-stack-windows.sh",
+    "run:stack:unix": "sh build-scripts/run-stack-unix.sh",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
     "tauri": "tauri",
     "rust:install:target:android": "rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android",
-    "rust:install:target:linux": "rustup target add x86_64-unknown-linux-gnu && rustup target add i686-unknown-linux-gnu && rustup target add aarch64-unknown-linux-gnu"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.0.0-alpha.11",
