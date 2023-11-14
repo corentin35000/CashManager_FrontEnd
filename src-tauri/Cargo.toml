@@ -1,7 +1,7 @@
 [package]
-name = "tauri-app"
+name = "cash-manager"
 version = "0.0.0"
-description = "A Tauri App"
+description = "CashManager App"
 authors = ["you"]
 license = ""
 repository = ""
