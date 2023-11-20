@@ -1,0 +1,9 @@
+dist
+README.md
+docker-compose.yml
+Dockerfile
+.github/**
+docs/**
+/vitest/unit/test-reports/
+/cypress/e2e/test-reports/
+.gitignore

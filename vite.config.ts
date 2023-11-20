@@ -1,9 +1,10 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
-import { internalIpV4 } from "internal-ip";
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { internalIpV4 } from 'internal-ip'
+import { fileURLToPath, URL } from 'url'
 
 // @ts-expect-error process is a nodejs global
-const mobile: boolean = !!/android|ios/.exec(process.env.TAURI_ENV_PLATFORM);
+const mobile: boolean = !!/android|ios/.exec(process.env.TAURI_ENV_PLATFORM)
 
 // https://vitejs.dev/config/
 export default defineConfig(async () => ({
@@ -18,18 +19,22 @@ export default defineConfig(async () => ({
     port: 1420,
     strictPort: true,
     hmr: mobile
-        ?
-        {
-            protocol: 'ws',
-            host: await internalIpV4(),
-            port: 1421
+      ? {
+          protocol: 'ws',
+          host: await internalIpV4(),
+          port: 1421
         }
-        :
-        {
-            clientPort: 1420
+      : {
+          clientPort: 1420
         },
     watch: {
       usePolling: true
     }
   },
-}));
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '~': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+}))
