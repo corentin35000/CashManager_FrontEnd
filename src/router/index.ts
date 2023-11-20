@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import SignUpView from '@/views/SignUpView.vue'
 import CookieService from '@/services/CookieService.ts'
-import HomeView from "@/views/HomeView.vue";
+import AppView from "@/views/AppView.vue";
 import SignInView from "@/views/SignInView.vue";
 
 const router = createRouter({
@@ -12,9 +12,9 @@ const router = createRouter({
       path: '/',
       children: [
         {
-          path: '',
-          name: 'home',
-          component: HomeView
+          path: 'app',
+          name: 'app',
+          component: AppView
         },
         {
           path: 'signup',
@@ -43,7 +43,7 @@ router.beforeEach(
     _from: RouteLocationNormalized,
     next: NavigationGuardNext
   ) => {
-    const publicRoutes: string[] = ['logout', 'signup', 'signin', 'not-found']
+    const publicRoutes: string[] = ['logout', 'signup', 'signin', 'app', 'not-found']
     if (to.name && publicRoutes.includes(to.name.toString())) {
       next()
     } else {

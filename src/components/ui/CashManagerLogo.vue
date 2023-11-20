@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts" setup>
-const SITE_NAME = 'Time Manager'
+const SITE_NAME = 'Cash Manager'
 
 /*PROPS*/
 const props = defineProps({

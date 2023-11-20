@@ -28,15 +28,9 @@
         rules="required"
       />
     </div>
-    <CashManagerIcon :disabled="!meta.valid"
-                     :load="buttonLoading"
-                     type="submit"
-                     name="user"
-                     mode="stroke"
-
-    >
-      {{ buttonLoading ? 'Loading...' : 'Signup' }}
-    </CashManagerIcon>
+    <CashManagerButton :disabled="!meta.valid" :load="buttonLoading" type="submit">
+      {{ buttonLoading ? 'Loading...' : 'Register' }}
+    </CashManagerButton>
   </Form>
 </template>
 
@@ -46,6 +40,7 @@ import { ref } from 'vue'
 import CashManagerIcon from '@/components/ui/CashManagerIcon.vue'
 import CashManagerInput from "@/components/core/CashManagerInput.vue";
 import { useAuthStore } from '@/stores/authStore.ts'
+import CashManagerButton from "@/components/core/CashManagerButton.vue";
 
 /*REFS*/
 const values = ref({

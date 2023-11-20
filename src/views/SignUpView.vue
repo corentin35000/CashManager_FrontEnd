@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4 w-full">
+  <div class="flex flex-col gap-4 w-full h-full">
     <div class="flex flex-col gap-4">
       <div class="flex items-center justify-center mb-6">
         <CashManagerLogo to="/signup" :size="56" large />
