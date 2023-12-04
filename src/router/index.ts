@@ -4,6 +4,9 @@ import SignUpView from '@/views/SignUpView.vue'
 import CookieService from '@/services/CookieService.ts'
 import AppView from "@/views/AppView.vue";
 import SignInView from "@/views/SignInView.vue";
+import CartView from "@/views/CartView.vue";
+import ProfileView from "@/views/ProfileView.vue";
+import PaymentMethods from "@/components/PaymentMethods.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -11,6 +14,11 @@ const router = createRouter({
     {
       path: '/',
       children: [
+        {
+          path: '',
+          name: 'home',
+          redirect: () => 'app'
+        },
         {
           path: 'app',
           name: 'app',
@@ -22,9 +30,24 @@ const router = createRouter({
           component: SignUpView
         },
         {
+          path: 'cart',
+          name: 'cart',
+          component: CartView
+        },
+        {
+          path: 'profile',
+          name: 'profile',
+          component: ProfileView
+        },
+        {
           path: 'signin',
           name: 'signin',
           component: SignInView
+        },
+        {
+          path: 'payment-methods',
+          name: 'payment-methods',
+          component: PaymentMethods
         }
       ]
     },
@@ -43,7 +66,7 @@ router.beforeEach(
     _from: RouteLocationNormalized,
     next: NavigationGuardNext
   ) => {
-    const publicRoutes: string[] = ['logout', 'signup', 'signin', 'app', 'not-found']
+    const publicRoutes: string[] = ['logout', 'signup', 'signin', 'app', 'payment-methods', 'cart', 'profile', 'not-found']
     if (to.name && publicRoutes.includes(to.name.toString())) {
       next()
     } else {

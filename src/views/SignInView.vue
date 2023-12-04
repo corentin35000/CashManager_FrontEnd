@@ -16,7 +16,6 @@
 </template>
 
 <script lang="ts" setup>
-import SignupForm from '@/components/forms/SignupForm.vue'
 import CashManagerLogo from '@/components/ui/CashManagerLogo.vue'
 import CashManagerLink from '@/components/core/CashManagerLink.vue'
 import SignInForm from "@/components/forms/SignInForm.vue";
