@@ -9,40 +9,27 @@ export type LoginCommand = {
 }
 
 export type SignupCommand = {
-  username: string
+  firstname: string
+  lastname: string
   email: string
   password: string
+  password_confirmation: string
 }
 
-export type SignInResponse =
-  | {
-      user: User
-      token: string
-    }
-  | ErrorResponse
+export type SignInResponse = User | ErrorResponse
 
-export type SignUpResponse =
-  | {
-      user: User
-      token: string
-    }
-  | ErrorResponse
 
 export default class AuthService extends BaseApiService {
   // Sign in a user
-  static async signIn(data: LoginCommand): Promise<SignInResponse> {
+  static async signIn(data: LoginCommand): Promise<User> {
     return await this.post({
-      url: `/sign_in`,
-      data
-    })
+      url: `/signin`, data })
   }
 
   // Sign up a new user
-  static async signUp(data: SignupCommand): Promise<SignUpResponse> {
+  static async signUp(data: SignupCommand): Promise<void> {
     return await this.post({
-      url: `/sign_up`,
-      data
-    })
+      url: `/signup`, data })
   }
 
   // Sign out the current user

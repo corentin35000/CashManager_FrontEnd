@@ -17,7 +17,7 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          redirect: () => 'signin'
+          component: AppView
         },
         {
           path: 'app',
@@ -72,7 +72,7 @@ router.beforeEach(
     } else {
       const user: string | undefined = CookieService.getCookie('user')
       if (!user) {
-        next({ name: 'signup' })
+        next({ name: 'signin' })
       } else {
         next()
       }
