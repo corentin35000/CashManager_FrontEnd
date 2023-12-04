@@ -2,12 +2,21 @@
   <Form v-slot="{ meta }" class="flex flex-col gap-6 p-5" @submit="signup">
     <div class="flex flex-col gap-6">
       <CashManagerInput
-        v-model:value="values.username"
-        type="username"
-        id="username"
-        label="Username"
+        v-model:value="values.firstname"
+        type="firstname"
+        id="firstname"
+        label="Firstname"
         rules="required"
-        placeholder="username"
+        placeholder="John"
+      />
+
+      <CashManagerInput
+          v-model:value="values.lastname"
+          type="lastname"
+          id="lastname"
+          label="Lastname"
+          rules="required"
+          placeholder="Doe"
       />
 
       <CashManagerInput
@@ -16,7 +25,7 @@
         id="email"
         label="Email"
         rules="required|email"
-        placeholder="email@time-manager.com"
+        placeholder="john@doe.com"
       />
     </div>
     <div class="flex flex-col gap-6">
@@ -27,6 +36,13 @@
         label="Password"
         rules="required"
       />
+      <CashManagerInput
+          v-model:value="values.password_confirmation"
+          type="password"
+          id="password"
+          label="Password Confirmation"
+          rules="required"
+      />
     </div>
     <CashManagerButton :disabled="!meta.valid" :load="buttonLoading" type="submit">
       {{ buttonLoading ? 'Loading...' : 'Register' }}
@@ -36,23 +52,29 @@
 
 <script lang="ts" setup>
 import { Form } from 'vee-validate'
-import { ref } from 'vue'
-import CashManagerIcon from '@/components/ui/CashManagerIcon.vue'
+import {Ref, ref} from 'vue'
 import CashManagerInput from "@/components/core/CashManagerInput.vue";
 import { useAuthStore } from '@/stores/authStore.ts'
 import CashManagerButton from "@/components/core/CashManagerButton.vue";
+import {SignupCommand} from "@/services/AuthService.ts";
+
+/* STORE */
+const authStore = useAuthStore()
+
 
 /*REFS*/
-const values = ref({
-  username: '',
+const values: Ref<SignupCommand> = ref({
+  firstname: '',
+  lastname: '',
   email: '',
-  password: ''
+  password: '',
+  password_confirmation: ''
 })
 const buttonLoading = ref(false)
 
 const signup = async () => {
   buttonLoading.value = true
-  await useAuthStore().signUp(values.value)
+  await authStore.signUp(values.value)
   buttonLoading.value = false
 }
 </script>

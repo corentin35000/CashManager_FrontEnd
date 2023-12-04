@@ -1,14 +1,13 @@
 <template>
   <div class="flex flex-col gap-4 w-full h-full">
-
-    <div class="flex items-center justify-center mb-6">
+    <div class="flex items-center justify-center my-4">
       <CashManagerLogo to="/signup" :size="56" large />
     </div>
     <SignupForm />
 
     <p class="text-center text-white text-xl">or</p>
     <CashManagerLink
-        class="text-sm text-white justify-center"
+        class="text-sm text-white justify-center mb-24"
         :link="{ name: 'signin', query: $route.query }">
       Connect to your Account
     </CashManagerLink>
@@ -19,4 +18,5 @@
 import SignupForm from '@/components/forms/SignupForm.vue'
 import CashManagerLogo from '@/components/ui/CashManagerLogo.vue'
 import CashManagerLink from '@/components/core/CashManagerLink.vue'
+
 </script>
