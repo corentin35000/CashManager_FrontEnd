@@ -56,14 +56,14 @@
         @click.prevent="handleTogglePassword"
     >
       <CashManagerIcon
-          v-if="!togglePassword"
+          v-if="togglePassword"
           title="Afficher le mot de passe"
           name="eye"
           mode="stroke"
           color="#908e97"
       />
       <CashManagerIcon
-          v-if="togglePassword"
+          v-if="!togglePassword"
           title="Masquer le mot de passe"
           name="eye-off"
           mode="stroke"

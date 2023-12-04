@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
-import SignUpView from '@/views/SignUpView.vue'
+import SignUpView from '@/views/Auth/SignUpView.vue'
 import CookieService from '@/services/CookieService.ts'
 import AppView from "@/views/AppView.vue";
-import SignInView from "@/views/SignInView.vue";
+import SignInView from "@/views/Auth/SignInView.vue";
 import CartView from "@/views/CartView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import PaymentMethods from "@/components/PaymentMethods.vue";
@@ -17,7 +17,7 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          redirect: () => 'app'
+          redirect: () => 'signin'
         },
         {
           path: 'app',
@@ -30,6 +30,11 @@ const router = createRouter({
           component: SignUpView
         },
         {
+          path: 'signin',
+          name: 'signin',
+          component: SignInView
+        },
+        {
           path: 'cart',
           name: 'cart',
           component: CartView
@@ -38,11 +43,6 @@ const router = createRouter({
           path: 'profile',
           name: 'profile',
           component: ProfileView
-        },
-        {
-          path: 'signin',
-          name: 'signin',
-          component: SignInView
         },
         {
           path: 'payment-methods',
