@@ -7,6 +7,7 @@ import SignInView from "@/views/Auth/SignInView.vue";
 import CartView from "@/views/CartView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import PaymentMethods from "@/components/PaymentMethods.vue";
+import ProductView from "@/views/Product/ProductView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +18,7 @@ const router = createRouter({
         {
           path: '',
           name: 'home',
-          component: AppView
+          component: ProductView
         },
         {
           path: 'app',
@@ -48,6 +49,11 @@ const router = createRouter({
           path: 'payment-methods',
           name: 'payment-methods',
           component: PaymentMethods
+        },
+        {
+          path: 'products',
+          name: 'products',
+          component: ProductView
         }
       ]
     },

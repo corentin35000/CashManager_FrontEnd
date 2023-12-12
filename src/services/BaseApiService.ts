@@ -48,9 +48,9 @@ export default class BaseApiService {
     }
   }
 
-  protected static async delete<T>(params: { url: string }): Promise<T> {
+  protected static async delete<T>(params: { url: string; data?: any }): Promise<T> {
     try {
-      const response = await this.client().delete(params.url)
+      const response = await this.client().delete(params.url, params.data)
       return response.data
     } catch (error) {
       const axiosError = error as AxiosError
