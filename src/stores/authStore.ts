@@ -33,7 +33,7 @@ export const useAuthStore = defineStore('auth', {
       try {
         await useAppStore().execWithPending<void>(async (): Promise<void> => {
           await AuthService.signUp(data)
-          await router.push({ name: 'login' })
+          await router.push({ name: 'signin' })
           notify.success('Signed up successfully!')
         })
       } catch (e) {
