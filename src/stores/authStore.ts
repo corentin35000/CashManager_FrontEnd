@@ -14,18 +14,20 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
   }),
   actions: {
-    async signIn(data: LoginCommand): Promise<boolean> {
-      return await useAppStore().execWithPending(async () => {
-        const response: SignInResponse = await AuthService.signIn(data)
-        if ('error' in response) {
-          notify.error(response.error || 'Failed to sign in.')
-          return false
-        }
-        useUsersStore().setCurrentUser(response)
-        notify.success('Signed in successfully!')
-        await router.push({ name: 'home' })
-        return true
-      })
+    async signIn(data: LoginCommand): Promise<any> {
+      try {
+        await useAppStore().execWithPending(async () => {
+          const response: SignInResponse = await AuthService.signIn(data)
+          console.log("response", response)
+          useUsersStore().setCurrentUser(response)
+          await router.push({ name: 'home' })
+          return true
+        })
+      }catch (e) {
+        console.error(e)
+        notify.error('Failed to sign in.')
+        return false
+      }
     },
     async signUp(data: SignupCommand): Promise<void> {
       try {
