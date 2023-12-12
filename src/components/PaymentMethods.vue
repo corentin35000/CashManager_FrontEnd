@@ -23,7 +23,7 @@
           <label class="text-sm font-medium ml-4">Cheque</label>
         </div>
         <div v-show="selectedPaymentMethod === 'cheque'" class="grid grid-cols-2 gap-4 px-8 pb-8">
-          Scanner le QR CODE
+          <QRCodeScanner />
         </div>
       </div>
 
@@ -45,6 +45,7 @@
 
 <script>
 import Navbar from "@/components/navigations/Navbar.vue";
+import QRCodeScanner from "@/components/QRCodeScanner.vue";
 
 export default {
   data() {
@@ -52,6 +53,6 @@ export default {
       selectedPaymentMethod: null,
     };
   },
-  components: { Navbar },
+  components: {QRCodeScanner, Navbar },
 };
 </script>
