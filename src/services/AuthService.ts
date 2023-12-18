@@ -18,18 +18,21 @@ export type SignupCommand = {
 
 export type SignInResponse = User | ErrorResponse
 
-
 export default class AuthService extends BaseApiService {
   // Sign in a user
   static async signIn(data: LoginCommand): Promise<User> {
     return await this.post({
-      url: `/signin`, data })
+      url: `/signin`,
+      data
+    })
   }
 
   // Sign up a new user
   static async signUp(data: SignupCommand): Promise<void> {
     return await this.post({
-      url: `/signup`, data })
+      url: `/signup`,
+      data
+    })
   }
 
   // Sign out the current user

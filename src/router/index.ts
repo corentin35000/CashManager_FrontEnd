@@ -2,12 +2,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import SignUpView from '@/views/Auth/SignUpView.vue'
 import CookieService from '@/services/CookieService.ts'
-import AppView from "@/views/AppView.vue";
-import SignInView from "@/views/Auth/SignInView.vue";
-import CartView from "@/views/CartView.vue";
-import ProfileView from "@/views/ProfileView.vue";
-import PaymentMethods from "@/components/PaymentMethods.vue";
-import ProductView from "@/views/Product/ProductView.vue";
+import SignInView from '@/views/Auth/SignInView.vue'
+import CartView from '@/views/CartView.vue'
+import ProfileView from '@/views/ProfileView.vue'
+import PaymentMethods from '@/components/PaymentMethods.vue'
+import ProductView from '@/views/Product/ProductView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -19,11 +18,6 @@ const router = createRouter({
           path: '',
           name: 'home',
           component: ProductView
-        },
-        {
-          path: 'app',
-          name: 'app',
-          component: AppView
         },
         {
           path: 'signup',
@@ -72,7 +66,16 @@ router.beforeEach(
     _from: RouteLocationNormalized,
     next: NavigationGuardNext
   ) => {
-    const publicRoutes: string[] = ['logout', 'signup', 'signin', 'app', 'payment-methods', 'cart', 'profile', 'not-found']
+    const publicRoutes: string[] = [
+      'logout',
+      'signup',
+      'signin',
+      'app',
+      'payment-methods',
+      'cart',
+      'profile',
+      'not-found'
+    ]
     if (to.name && publicRoutes.includes(to.name.toString())) {
       next()
     } else {

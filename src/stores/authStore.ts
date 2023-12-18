@@ -1,29 +1,24 @@
 import { defineStore } from 'pinia'
 import { notify } from '@/plugins/notyf'
-import type {
-  LoginCommand,
-  SignInResponse,
-  SignupCommand,
-} from '@/services/AuthService'
+import type { LoginCommand, SignInResponse, SignupCommand } from '@/services/AuthService'
 import AuthService from '@/services/AuthService'
 import { useUsersStore } from '@/stores/usersStore'
 import { useAppStore } from '@/stores/appStore'
 import router from '@/router'
 
 export const useAuthStore = defineStore('auth', {
-  state: () => ({
-  }),
+  state: () => ({}),
   actions: {
     async signIn(data: LoginCommand): Promise<any> {
       try {
         await useAppStore().execWithPending(async () => {
           const response: SignInResponse = await AuthService.signIn(data)
-          console.log("response", response)
+          console.log('response', response)
           useUsersStore().setCurrentUser(response)
           await router.push({ name: 'home' })
           return true
         })
-      }catch (e) {
+      } catch (e) {
         console.error(e)
         notify.error('Failed to sign in.')
         return false
@@ -45,7 +40,7 @@ export const useAuthStore = defineStore('auth', {
       useUsersStore().setCurrentUser(null)
       notify.success(message || 'Signed out successfully!')
       await router.push({ name: 'signin' })
-    },
+    }
   },
   getters: {
     isAuthenticated: () => {

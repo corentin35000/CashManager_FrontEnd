@@ -5,19 +5,10 @@
 
       test
     </div>
-    <Navbar></Navbar>
+    <TabBar></TabBar>
   </div>
 </template>
 
-<script>
-import Navbar from "@/components/navigations/Navbar.vue";
-
-export default {
-  data() {
-    return {
-      selectedPaymentMethod: null,
-    };
-  },
-  components: { Navbar },
-};
+<script lang="ts" setup>
+import TabBar from '@/components/navigations/TabBar.vue'
 </script>
