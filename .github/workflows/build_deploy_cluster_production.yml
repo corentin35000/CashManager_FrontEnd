@@ -1,4 +1,4 @@
-name: build_deploy_cluster_production
+name: build-sign-mobile
 
 on:
   release:
@@ -7,31 +7,36 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_deploy_cluster_production:
+  build-sign-mobile:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Build Docker Image
-        run: docker build -t your-app .
+      - name: Setup Java JDK LTS
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17.0.8'
+          distribution: 'oracle'
+          cache: 'gradle'
 
-      - name: Run Docker Container
-        run: docker run --name myappcontainer your-app
+      - name: Decode Keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > my-release-key.keystore
 
-      - name: Copy APK and AAB from Container
-        run: |
-          docker cp myappcontainer:/path/in/container/app-release.apk .
-          docker cp myappcontainer:/path/in/container/app-release.aab .
+      - name: Grant execute permission for gradlew
+        run: chmod +x src-tauri/gen/android/gradlew
 
-      - name: Upload APK
+      - name: Build and Sign AAB
+        run: ./gradlew bundleRelease
+        working-directory: src-tauri/gen/android
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          ALIAS_NAME: ${{ secrets.ALIAS_NAME }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Upload AAB as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: app-release.apk
-          path: app-release.apk
-
-      - name: Upload AAB
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-release.aab
-          path: app-release.aab
+          name: app-release-aab
+          path: src-tauri/gen/android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 1
