@@ -29,9 +29,6 @@ jobs:
       - name: Typecheck TypeScript to App
         run: npm run typecheck
 
-      #- name: Japa - Run tests unit and functionnal
-      #  run: npm run test:unit-functional:test-staging-prod
-
       - name: Deploy PR (main) for new Release
         uses: google-github-actions/release-please-action@v3
         with:
