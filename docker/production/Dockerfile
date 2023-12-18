@@ -74,6 +74,10 @@ RUN sdkmanager \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:$PATH"
 
+# Obligatoire de changer d'utilisateur pour les permission lors du build de l'app
+RUN useradd -m monutilisateur
+USER monutilisateur
+
 RUN chmod +x src-tauri/build.sh && \
     npm run rust:install:target:android && \
     npm run build:tauri:android

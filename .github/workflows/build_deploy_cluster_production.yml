@@ -29,7 +29,7 @@ jobs:
       - name: Create Container and Extract AAB
         run: |
           docker create --name temp-container myapp-builder
-          docker cp temp-container:/app/src-tauri/gen/android/app/build/outputs/bundle/release/app-release.aab ./app-release.aab
+          docker cp temp-container:/src-tauri/gen/android/app/build/outputs/bundle/release/app-release.aab ./app-release.aab
           docker rm temp-container
 
       - name: Upload AAB as artifact
