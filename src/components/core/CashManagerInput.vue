@@ -6,41 +6,41 @@
     </label>
 
     <Field
-        :rows="rows"
-        :rules="rules"
-        :validateOnInput="true"
-        v-slot="{ meta, field }"
-        :name="props.id"
-        :type="typeRef"
-        :autocomplete="autocomplete"
-        :value="props.value"
-        @input="emit('update:value', $event.target.value, $event)"
-        :placeholder="props.placeholder"
+      :rows="rows"
+      :rules="rules"
+      :validateOnInput="true"
+      v-slot="{ meta, field }"
+      :name="props.id"
+      :type="typeRef"
+      :autocomplete="autocomplete"
+      :value="props.value"
+      @input="emit('update:value', $event.target.value, $event)"
+      :placeholder="props.placeholder"
     >
       <textarea
-          v-if="rows"
-          :rows="rows"
-          v-bind="field"
-          :id="props.id"
-          :value="props.value"
-          class="placeholder:text-zinc-600 text-white bg-zinc-900 rounded-md border-2 outline-none focus:border-blue-400 w-full relative flex items-center justify-center pt-3 pl-3"
-          :placeholder="props.placeholder"
-          :class="
+        v-if="rows"
+        :rows="rows"
+        v-bind="field"
+        :id="props.id"
+        :value="props.value"
+        class="placeholder:text-zinc-600 text-white bg-zinc-900 rounded-md border-2 outline-none focus:border-blue-400 w-full relative flex items-center justify-center pt-3 pl-3"
+        :placeholder="props.placeholder"
+        :class="
           meta.validated && !meta.valid ? 'border-red-500' : 'border-zinc-500 hover:border-zinc-400'
         "
       />
       <input
-          v-else
-          v-bind="field"
-          :type="typeRef"
-          :id="props.id"
-          :autocomplete="autocomplete"
-          :value="props.value"
-          :min="props.min"
-          :step="props.step"
-          class="placeholder:text-zinc-600 text-white bg-zinc-900 rounded-md border-2 outline-none focus:border-blue-400 w-full relative flex items-center justify-center h-12 pl-3"
-          :placeholder="props.placeholder"
-          :class="[
+        v-else
+        v-bind="field"
+        :type="typeRef"
+        :id="props.id"
+        :autocomplete="autocomplete"
+        :value="props.value"
+        :min="props.min"
+        :step="props.step"
+        class="placeholder:text-zinc-600 text-white bg-zinc-900 rounded-md border-2 outline-none focus:border-blue-400 w-full relative flex items-center justify-center h-12 pl-3"
+        :placeholder="props.placeholder"
+        :class="[
           meta.validated && !meta.valid
             ? 'border-red-500'
             : 'border-zinc-500 hover:border-zinc-400',
@@ -50,24 +50,24 @@
     </Field>
 
     <div
-        :class="props.label ? 'top-11' : 'top-3'"
-        class="cursor-pointer absolute right-4"
-        v-if="type === 'password'"
-        @click.prevent="handleTogglePassword"
+      :class="props.label ? 'top-11' : 'top-3'"
+      class="cursor-pointer absolute right-4"
+      v-if="type === 'password'"
+      @click.prevent="handleTogglePassword"
     >
       <CashManagerIcon
-          v-if="togglePassword"
-          title="Afficher le mot de passe"
-          name="eye"
-          mode="stroke"
-          color="#908e97"
+        v-if="togglePassword"
+        title="Afficher le mot de passe"
+        name="eye"
+        mode="stroke"
+        color="#908e97"
       />
       <CashManagerIcon
-          v-if="!togglePassword"
-          title="Masquer le mot de passe"
-          name="eye-off"
-          mode="stroke"
-          color="#908e97"
+        v-if="!togglePassword"
+        title="Masquer le mot de passe"
+        name="eye-off"
+        mode="stroke"
+        color="#908e97"
       />
     </div>
     <ErrorMessage class="slide-from-left text-red-500 text-sm" :name="props.id" />

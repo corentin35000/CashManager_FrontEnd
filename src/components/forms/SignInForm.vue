@@ -1,20 +1,20 @@
 <template>
   <Form v-slot="{ meta }" class="flex flex-col gap-6 p-4" @submit="login">
     <CashManagerInput
-        v-model:value="values.email"
-        type="email"
-        id="email"
-        label="Email"
-        rules="required|email"
-        placeholder="email@time-manager.com"
+      v-model:value="values.email"
+      type="email"
+      id="email"
+      label="Email"
+      rules="required|email"
+      placeholder="email@time-manager.com"
     />
 
     <CashManagerInput
-        v-model:value="values.password"
-        type="password"
-        id="password"
-        label="Password"
-        rules="required"
+      v-model:value="values.password"
+      type="password"
+      id="password"
+      label="Password"
+      rules="required"
     />
 
     <slot />
