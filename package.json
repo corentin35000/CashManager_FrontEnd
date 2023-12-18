@@ -2,7 +2,7 @@
   "name": "cash-manager",
   "private": true,
   "type": "module",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "scripts": {
     "typecheck": "vue-tsc --noEmit",
     "dev": "vite dev --port 1420",
