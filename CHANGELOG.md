@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.1.0...v1.2.0) (2023-12-18)
+
+
+### 🚀 Features
+
+* add git in dockerfile ([b7cb8a8](https://github.com/corentin35000/CashManager_FrontEnd/commit/b7cb8a851bb0649d7f35fb04b3061103076f4124))
+
 ## [1.1.0](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.0.0...v1.1.0) (2023-12-18)
 
 
