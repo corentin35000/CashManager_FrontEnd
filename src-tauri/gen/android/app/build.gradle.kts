@@ -15,6 +15,14 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+    signingConfigs {
+        release {
+            storeFile file('../../../my-release-key.keystore')
+            storePassword System.getenv('KEYSTORE_PASSWORD') 
+            keyAlias System.getenv('ALIAS_NAME')
+            keyPassword System.getenv('KEY_PASSWORD')
+        }
+    }
     buildTypes {
         getByName("debug") {
             manifestPlaceholders["usesCleartextTraffic"] = "true"
