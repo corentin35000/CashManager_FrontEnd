@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.3](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.2...v1.2.3) (2023-12-18)
+
+
+### 🐛 Bug Fixes
+
+* fixed permission for android ([affbbc2](https://github.com/corentin35000/CashManager_FrontEnd/commit/affbbc202543fe4b1289965e147fbdacfa0a9302))
+
 ## [1.2.2](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.1...v1.2.2) (2023-12-18)
 
 
