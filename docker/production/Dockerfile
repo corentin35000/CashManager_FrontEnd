@@ -26,7 +26,7 @@ RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesourc
 
 # Mettre à jour et installer Node.js
 RUN apt-get update && \
-    apt-get install nodejs -y
+    apt-get install nodejs git -y
 
 # Install dependencies for Tauri
 RUN apt install -y \
