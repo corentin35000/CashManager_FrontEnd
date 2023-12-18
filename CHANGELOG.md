@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.0...v1.2.1) (2023-12-18)
+
+
+### 🐛 Bug Fixes
+
+* fixed script .sh for dockerfile in ci ([0c974b9](https://github.com/corentin35000/CashManager_FrontEnd/commit/0c974b9088b51c5c254695080a524d94def4cece))
+
 ## [1.2.0](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.1.0...v1.2.0) (2023-12-18)
 
 
