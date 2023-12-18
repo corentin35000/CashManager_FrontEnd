@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.3...v1.2.4) (2023-12-18)
+
+
+### 🐛 Bug Fixes
+
+* fixed path in dockerfile ([a094351](https://github.com/corentin35000/CashManager_FrontEnd/commit/a09435168fa45ac6d4b8f99141689a17cfda55fa))
+
 ## [1.2.3](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.2...v1.2.3) (2023-12-18)
 
 
