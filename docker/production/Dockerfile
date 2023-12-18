@@ -74,7 +74,6 @@ RUN sdkmanager \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:$PATH"
 
-RUN chmod -R 777 src-tauri/gen/android/app/src/main/jniLibs && \
-    chmod +x src-tauri/build.sh && \
+RUN chmod +x src-tauri/build.sh && \
     npm run rust:install:target:android && \
     npm run build:tauri:android
