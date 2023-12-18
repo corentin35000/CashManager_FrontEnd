@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.7](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.6...v1.2.7) (2023-12-18)
+
+
+### 🐛 Bug Fixes
+
+* fixed ci for permission ([44143be](https://github.com/corentin35000/CashManager_FrontEnd/commit/44143be59d7619c898019fe5da9c5b1730d65719))
+
+
+### 🔧 Continuous Integration
+
+* delete step setup jdk ([78c8ec5](https://github.com/corentin35000/CashManager_FrontEnd/commit/78c8ec5e2802e1c6b1312cdefb0f7aa769ad1a5e))
+
 ## [1.2.6](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.5...v1.2.6) (2023-12-18)
 
 
