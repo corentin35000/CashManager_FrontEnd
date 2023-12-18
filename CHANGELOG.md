@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.6](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.5...v1.2.6) (2023-12-18)
+
+
+### 🐛 Bug Fixes
+
+* add new user in dockerfile ([698a7e3](https://github.com/corentin35000/CashManager_FrontEnd/commit/698a7e36eedfa4b363ef68f85d16958c52ae6a7a))
+
 ## [1.2.5](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.4...v1.2.5) (2023-12-18)
 
 
