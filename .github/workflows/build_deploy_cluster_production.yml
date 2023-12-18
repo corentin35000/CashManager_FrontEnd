@@ -23,20 +23,18 @@ jobs:
       - name: Decode Keystore
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > my-release-key.keystore
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x src-tauri/gen/android/gradlew
+      - name: Build Docker Image
+        run: docker build -t myapp-builder .
 
-      - name: Build and Sign AAB
-        run: ./gradlew bundleRelease
-        working-directory: src-tauri/gen/android
-        env:
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          ALIAS_NAME: ${{ secrets.ALIAS_NAME }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      - name: Create Container and Extract AAB
+        run: |
+          docker create --name temp-container myapp-builder
+          docker cp temp-container:/app/src-tauri/gen/android/app/build/outputs/bundle/release/app-release.aab ./app-release.aab
+          docker rm temp-container
 
       - name: Upload AAB as artifact
         uses: actions/upload-artifact@v3
         with:
           name: app-release-aab
-          path: src-tauri/gen/android/app/build/outputs/bundle/release/app-release.aab
+          path: ./app-release.aab
           retention-days: 1

@@ -1,5 +1,5 @@
 # Stage 1: Node.js environment
-FROM node:20.9.0 as node-builder
+FROM node:20.10.0 as node-builder
 
 WORKDIR /app
 
@@ -55,6 +55,10 @@ RUN wget -q https://dl.google.com/android/repository/commandlinetools-linux-6609
 ENV JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 ENV ANDROID_HOME="/usr/local/android-sdk"
 ENV PATH="$JAVA_HOME/bin:$ANDROID_HOME/cmdline-tools/tools/bin:$PATH"
+ENV NDK_HOME="$ANDROID_HOME/ndk/26.1.10909125"
+ENV KEYSTORE_PASSWORD=Marylene59!
+ENV ALIAS_NAME=keystore_alias_name
+ENV KEY_PASSWORD=Marylene59!
 
 # Accept licenses
 RUN yes | sdkmanager --licenses
@@ -66,11 +70,8 @@ RUN sdkmanager \
     "ndk;26.1.10909125" \
     "cmake;3.10.2.4988404"
 
-ENV NDK_HOME="$ANDROID_HOME/ndk/26.1.10909125"
-
 # Install Rust and add targets for Android
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
 ENV PATH="/root/.cargo/bin:$PATH"
 
 RUN npm run rust:install:target:android && npm run build:tauri:android
