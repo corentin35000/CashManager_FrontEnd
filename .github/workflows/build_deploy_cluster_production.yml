@@ -24,7 +24,7 @@ jobs:
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > my-release-key.keystore
 
       - name: Build Docker Image
-        run: docker build -t myapp-builder .
+        run: docker build -f ./docker/production/Dockerfile -t myapp-builder .
 
       - name: Create Container and Extract AAB
         run: |
