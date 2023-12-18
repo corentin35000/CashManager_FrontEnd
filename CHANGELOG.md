@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.0.0...v1.1.0) (2023-12-18)
+
+
+### 🚀 Features
+
+* change ci and dockerfile for production ([10c4031](https://github.com/corentin35000/CashManager_FrontEnd/commit/10c40315b0f7112666e7f8d2786631ccd5733702))
+
+
+### 🐛 Bug Fixes
+
+* fixed build docker image in ci ([4afcebc](https://github.com/corentin35000/CashManager_FrontEnd/commit/4afcebcc70e7d3af646d2f43791c3004eded5fe4))
+
 ## 1.0.0 (2023-12-18)
 
 
