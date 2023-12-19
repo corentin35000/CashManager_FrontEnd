@@ -73,20 +73,20 @@ RUN sdkmanager \
 # Install Rust and add targets for Android
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
+# Copier le répertoire .cargo dans un emplacement accessible par monutilisateur
+RUN cp -R /root/.cargo /home/monutilisateur/.cargo && \
+    chmod -R 755 /home/monutilisateur/.cargo
+
 # Créer un nouvel utilisateur pour le processus de build
 RUN useradd -m monutilisateur
 
-# Changer la propriété de tous les fichiers et dossiers dans le répertoire courant pour le nouvel utilisateur
-RUN chown -R monutilisateur:monutilisateur .
+# Changer la propriété de tous les fichiers et dossiers dans le répertoire courant et le répertoire .cargo pour le nouvel utilisateur
+RUN chown -R monutilisateur:monutilisateur /app /home/monutilisateur/.cargo
 
 # Passer à l'utilisateur non-root
 USER monutilisateur
 
-# Copier le répertoire .cargo dans le home de l'utilisateur monutilisateur
-RUN cp -R /root/.cargo /home/monutilisateur/ && \
-    chmod -R 755 /home/monutilisateur/.cargo
-
-# Mettre à jour le PATH pour le home de l'utilisateur monutilisateur
+# Mettre à jour le PATH pour inclure le binaire cargo pour l'utilisateur non-root
 ENV PATH="/home/monutilisateur/.cargo/bin:$PATH"
 
 # Continuer avec les commandes de build
