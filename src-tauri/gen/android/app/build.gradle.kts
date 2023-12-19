@@ -5,15 +5,23 @@ plugins {
 }
 
 android {
-    compileSdk = 33
-    namespace = "com.cash.cash_manager"
+    compileSdk = 34
+    namespace = "com.cash.manager"
     defaultConfig {
         manifestPlaceholders["usesCleartextTraffic"] = "false"
-        applicationId = "com.cash.cash_manager"
+        applicationId = "com.cash.manager"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+    }
+    signingConfigs {
+        release {
+            storeFile file('../../../my-release-key.keystore')
+            storePassword System.getenv('KEYSTORE_PASSWORD') 
+            keyAlias System.getenv('ALIAS_NAME')
+            keyPassword System.getenv('KEY_PASSWORD')
+        }
     }
     buildTypes {
         getByName("debug") {

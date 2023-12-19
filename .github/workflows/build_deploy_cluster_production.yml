@@ -1,4 +1,4 @@
-name: build_deploy_cluster_production
+name: build-sign-mobile
 
 on:
   release:
@@ -7,31 +7,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_deploy_cluster_production:
+  build-sign-mobile:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Decode Keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > my-release-key.keystore
 
       - name: Build Docker Image
-        run: docker build -t your-app .
+        run: docker build -f ./docker/production/Dockerfile -t myapp-builder .
 
-      - name: Run Docker Container
-        run: docker run --name myappcontainer your-app
-
-      - name: Copy APK and AAB from Container
+      - name: Create Container and Extract AAB
         run: |
-          docker cp myappcontainer:/path/in/container/app-release.apk .
-          docker cp myappcontainer:/path/in/container/app-release.aab .
+          docker create --name temp-container myapp-builder
+          docker cp temp-container:/src-tauri/gen/android/app/build/outputs/bundle/release/app-release.aab ./app-release.aab
+          docker rm temp-container
 
-      - name: Upload APK
+      - name: Upload AAB as artifact
         uses: actions/upload-artifact@v3
         with:
-          name: app-release.apk
-          path: app-release.apk
-
-      - name: Upload AAB
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-release.aab
-          path: app-release.aab
+          name: app-release-aab
+          path: ./app-release.aab
+          retention-days: 1

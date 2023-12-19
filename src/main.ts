@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-import './styles.css'
 import router from '@/router'
 import App from './App.vue'
 
@@ -8,7 +7,6 @@ import en from '@vee-validate/i18n/dist/locale/en.json'
 import { configure, defineRule } from 'vee-validate'
 import { required, email, numeric, min } from '@vee-validate/rules'
 import { createPinia } from 'pinia'
-
 
 import './assets/scss/tailwind.scss'
 import './assets/scss/main.scss'

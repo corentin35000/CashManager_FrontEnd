@@ -11,12 +11,12 @@
       />
 
       <CashManagerInput
-          v-model:value="values.lastname"
-          type="lastname"
-          id="lastname"
-          label="Lastname"
-          rules="required"
-          placeholder="Doe"
+        v-model:value="values.lastname"
+        type="lastname"
+        id="lastname"
+        label="Lastname"
+        rules="required"
+        placeholder="Doe"
       />
 
       <CashManagerInput
@@ -37,11 +37,11 @@
         rules="required"
       />
       <CashManagerInput
-          v-model:value="values.password_confirmation"
-          type="password"
-          id="password"
-          label="Password Confirmation"
-          rules="required"
+        v-model:value="values.password_confirmation"
+        type="password"
+        id="password"
+        label="Password Confirmation"
+        rules="required"
       />
     </div>
     <CashManagerButton :disabled="!meta.valid" :load="buttonLoading" type="submit">
@@ -52,15 +52,14 @@
 
 <script lang="ts" setup>
 import { Form } from 'vee-validate'
-import {Ref, ref} from 'vue'
-import CashManagerInput from "@/components/core/CashManagerInput.vue";
+import { Ref, ref } from 'vue'
+import CashManagerInput from '@/components/core/CashManagerInput.vue'
 import { useAuthStore } from '@/stores/authStore.ts'
-import CashManagerButton from "@/components/core/CashManagerButton.vue";
-import {SignupCommand} from "@/services/AuthService.ts";
+import CashManagerButton from '@/components/core/CashManagerButton.vue'
+import { SignupCommand } from '@/services/AuthService.ts'
 
 /* STORE */
 const authStore = useAuthStore()
-
 
 /*REFS*/
 const values: Ref<SignupCommand> = ref({

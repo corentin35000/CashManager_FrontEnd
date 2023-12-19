@@ -3,7 +3,7 @@
     <img
       :width="props.size"
       :height="props.size"
-      src="src/assets/images/logo-blue.png"
+      src="../../../src/assets/images/logo-blue.png"
       alt="Cash Manager Logo"
       class="mr-2 w-6"
     />

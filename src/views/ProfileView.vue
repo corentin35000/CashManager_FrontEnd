@@ -30,11 +30,12 @@
           message="Are you sure you want to delete this account ?"
       />
     </div>
-    <Navbar></Navbar>
+    <TabBar></TabBar>
   </div>
 </template>
 
 <script lang="ts" setup>
+<<<<<<< HEAD
 import Navbar from "@/components/navigations/Navbar.vue";
 import AccountForm from '@/components/forms/AccountForm.vue'
 import CashManagerButton from "@/components/core/CashManagerButton.vue";
@@ -68,4 +69,7 @@ const updateUser = async (user: UserCommand) => {
 
   buttonLoading.value = false
 }
+=======
+import TabBar from '@/components/navigations/TabBar.vue'
+>>>>>>> 0b466e812c9c0d9bb763961c3234bfd6e11d6777
 </script>

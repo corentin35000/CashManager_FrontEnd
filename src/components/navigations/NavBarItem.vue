@@ -1,8 +1,8 @@
 <template>
   <component
-      :is="tag"
-      :to="props.to"
-      class="w-fit px-3 translate-y-0 transform duration-100 active:translate-y-0.5 flex items-center gap-3 rounded-md hover:bg-[rgba(255,255,255,0.1)] py-2 cursor-pointer text-base font-medium"
+    :is="tag"
+    :to="props.to"
+    class="w-fit px-3 translate-y-0 transform duration-100 active:translate-y-0.5 flex items-center gap-3 rounded-md hover:bg-[rgba(255,255,255,0.1)] py-2 cursor-pointer text-base font-medium"
   >
     <slot />
   </component>
