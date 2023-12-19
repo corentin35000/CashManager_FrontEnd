@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { internalIpV4 } from 'internal-ip'
 import { fileURLToPath, URL } from 'url'
+import { defineConfig } from 'vitest/config'
 
 // @ts-expect-error process is a nodejs global
 const mobile: boolean = !!/android|ios/.exec(process.env.TAURI_ENV_PLATFORM)
