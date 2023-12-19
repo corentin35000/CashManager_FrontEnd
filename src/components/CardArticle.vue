@@ -22,6 +22,12 @@
           size="sm"
           >Ajouter au panier</CashManagerButton>
     </div>
+    <div v-if="props.product?.quantity > 0" class="flex items-center border-gray-100">
+      <button @click="decreaseQuantity(item)" class="rounded-l bg-gray-100 py-1 px-3.5 hover:bg-blue-500 hover:text-blue-50"> - </button>
+      <div class="h-8 w-8 border bg-white text-center flex items-center justify-center">20</div>
+      <button @click="increaseQuantity(item)" class="rounded-r bg-gray-100 py-1 px-3 hover:bg-blue-500 hover:text-blue-50"> + </button>
+>>>>>>> Stashed changes
+    </div>
   </div>
 </template>
 <script setup lang="ts">
@@ -36,4 +42,5 @@ const props = defineProps({
     required: true
   }
 })
+<<<<<<< Updated upstream
 </script>
