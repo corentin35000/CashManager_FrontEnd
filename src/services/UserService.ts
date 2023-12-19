@@ -6,11 +6,19 @@ export type User = {
   id: number
   username: string
   email: string
+  lastname: string
+  firstname: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export type UserCommand = {
   username: string
   email: string
+  lastname: string
+  firstname: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 // UserService
@@ -18,7 +26,7 @@ export type UserCommand = {
 export default class UserService extends BaseApiService {
   // Get a single user by ID
   static async getUser(userId: number): Promise<User | ErrorResponse> {
-    return await this.get(`/users/${userId}`)
+    return await this.get(`/user/${userId}`)
   }
 
   // Get users based on optional email and username parameters
@@ -36,23 +44,24 @@ export default class UserService extends BaseApiService {
         urlParams.append('username', params.username)
       }
 
-      return await this.get(`/users?${params.toString()}`)
+      return await this.get(`/user?${params.toString()}`)
     }
-    return await this.get(`/users`)
+    return await this.get(`/user`)
   }
 
   // Create a user
   static async createUser(data: UserCommand): Promise<User | ErrorResponse> {
     return await this.post({
-      url: `/users`,
+      url: `/user`,
       data
     })
   }
 
   // Update a user
   static async updateUser(data: UserCommand, userId: number): Promise<User | ErrorResponse> {
+    console.log("user id", userId)
     return await this.put({
-      url: `/users/${userId}`,
+      url: `/user/${userId}`,
       data
     })
   }
@@ -60,7 +69,7 @@ export default class UserService extends BaseApiService {
   // Delete a user by ID
   static async deleteUser(userId: number): Promise<void | ErrorResponse> {
     return await this.delete({
-      url: `/users/${userId}`
+      url: `/user/${userId}`
     })
   }
 }

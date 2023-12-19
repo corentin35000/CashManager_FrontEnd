@@ -9,6 +9,7 @@ import AuthService from '@/services/AuthService'
 import { useUsersStore } from '@/stores/usersStore'
 import { useAppStore } from '@/stores/appStore'
 import router from '@/router'
+import {ErrorResponse} from "@/services/BaseApiService.ts";
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -41,11 +42,22 @@ export const useAuthStore = defineStore('auth', {
         notify.error('Failed to sign up')
       }
     },
-    async signOut(message?: string): Promise<void> {
+    async signOutLocal(message?: string): Promise<void> {
       useUsersStore().setCurrentUser(null)
       notify.success(message || 'Signed out successfully!')
       await router.push({ name: 'signin' })
     },
+    async signOut(): Promise<boolean> {
+      return await useAppStore().execWithPending(async () => {
+        const response: { message: string } | ErrorResponse = await AuthService.signOut()
+        if ('error' in response) {
+          notify.error(response.error || 'Failed to sign out.')
+          return false
+        }
+        await this.signOutLocal(response.message)
+        return true
+      })
+    }
   },
   getters: {
     isAuthenticated: () => {

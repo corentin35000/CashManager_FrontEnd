@@ -11,7 +11,7 @@
           <label class="text-sm font-medium ml-4">Credit Card</label>
         </div>
         <div v-show="selectedPaymentMethod === 'creditCard'" class="grid grid-cols-2 gap-4 px-8 pb-8">
-          Scanner le NFC
+          <StripeForm />
         </div>
       </div>
 
@@ -26,18 +26,6 @@
           <QRCodeScanner />
         </div>
       </div>
-
-      <div class="border-t bg-white">
-        <div class="flex items-center px-8 py-5" @click="selectedPaymentMethod = 'stripe'">
-          <input class="appearance-none w-4 h-4 rounded-full border-2 border-white ring-2 ring-blue-600 ring-opacity-100"
-                 :class="{'bg-blue-600': selectedPaymentMethod === 'stripe'}"
-                 type="radio" value="stripe" v-model="selectedPaymentMethod">
-          <label class="text-sm font-medium ml-4">Stripe</label>
-        </div>
-        <div v-show="selectedPaymentMethod === 'stripe'" class="grid grid-cols-2 gap-4 px-8 pb-8">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png" alt="stripe" class="w-40">
-        </div>
-      </div>
     </div>
     <Navbar></Navbar>
   </div>
@@ -46,6 +34,7 @@
 <script>
 import Navbar from "@/components/navigations/Navbar.vue";
 import QRCodeScanner from "@/components/QRCodeScanner.vue";
+import StripeForm from "@/components/forms/StripeForm.vue";
 
 export default {
   data() {
@@ -53,6 +42,6 @@ export default {
       selectedPaymentMethod: null,
     };
   },
-  components: {QRCodeScanner, Navbar },
+  components: {StripeForm, QRCodeScanner, Navbar },
 };
 </script>
