@@ -1,5 +1,5 @@
 import BaseApiService from '@/services/BaseApiService'
-import type Product from '@/services/ProductService.ts'
+import type { Product } from '@/services/ProductService.ts'
 
 // Types
 export type addProduct = {
@@ -12,6 +12,7 @@ export type Cart = {
   product_id: number
   created_at: string
   updated_at: string
+  quantity: number
   product: Product
 }
 
