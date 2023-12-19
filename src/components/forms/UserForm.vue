@@ -28,8 +28,8 @@
 <script lang="ts" setup>
 import { Form } from 'vee-validate'
 import { ref } from 'vue'
-import CashManagerInput from "@/components/core/CashManagerInput.vue";
-import CashManagerButton from "@/components/core/CashManagerButton.vue";
+import CashManagerInput from '@/components/core/CashManagerInput.vue'
+import CashManagerButton from '@/components/core/CashManagerButton.vue'
 
 /*REFS*/
 const values = ref({

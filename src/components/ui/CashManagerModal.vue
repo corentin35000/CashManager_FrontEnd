@@ -54,8 +54,8 @@
 </template>
 
 <script lang="ts" setup>
-import CashManagerIcon from "@/components/ui/CashManagerIcon.vue";
-import CashManagerButton from "@/components/core/CashManagerButton.vue";
+import CashManagerIcon from '@/components/ui/CashManagerIcon.vue'
+import CashManagerButton from '@/components/core/CashManagerButton.vue'
 
 /* PROPS */
 const props = defineProps({

@@ -5,7 +5,7 @@ import AuthService from '@/services/AuthService'
 import { useUsersStore } from '@/stores/usersStore'
 import { useAppStore } from '@/stores/appStore'
 import router from '@/router'
-import {ErrorResponse} from "@/services/BaseApiService.ts";
+import { ErrorResponse } from '@/services/BaseApiService.ts'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({}),
@@ -41,7 +41,6 @@ export const useAuthStore = defineStore('auth', {
       useUsersStore().setCurrentUser(null)
       notify.success(message || 'Signed out successfully!')
       await router.push({ name: 'signin' })
-<<<<<<< HEAD
     },
     async signOut(): Promise<boolean> {
       return await useAppStore().execWithPending(async () => {
@@ -53,8 +52,6 @@ export const useAuthStore = defineStore('auth', {
         await this.signOutLocal(response.message)
         return true
       })
-=======
->>>>>>> 0b466e812c9c0d9bb763961c3234bfd6e11d6777
     }
   },
   getters: {

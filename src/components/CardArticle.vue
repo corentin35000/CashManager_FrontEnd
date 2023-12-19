@@ -3,10 +3,12 @@
     class="flex justify-center w-full aspect-w-1 aspect-h-1 rounded-t-lg overflow-hidden lg:aspect-none"
   >
     <img
-      :src="props.product.image"
+      :src="product.image"
       alt="Product image"
       class="object-center object-cover lg:w-32 lg:h-32"
     />
+    :src="props.product.image" alt="Product image" class="object-center object-cover lg:w-32
+    lg:h-32" />
   </div>
   <div class="p-4">
     <h3 class="text-lg text-gray-700 font-medium">

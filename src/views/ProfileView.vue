@@ -22,12 +22,12 @@
         </div>
       </div>
       <TimeConfirmModal
-          :show=showDeleteModal
-          @update:show="showDeleteModal = $event"
-          @cancel="showDeleteModal = false"
-          @ok="deleteAccount"
-          title="Delete account ?"
-          message="Are you sure you want to delete this account ?"
+        :show="showDeleteModal"
+        @update:show="showDeleteModal = $event"
+        @cancel="showDeleteModal = false"
+        @ok="deleteAccount"
+        title="Delete account ?"
+        message="Are you sure you want to delete this account ?"
       />
     </div>
     <TabBar></TabBar>
@@ -35,16 +35,15 @@
 </template>
 
 <script lang="ts" setup>
-<<<<<<< HEAD
-import Navbar from "@/components/navigations/Navbar.vue";
 import AccountForm from '@/components/forms/AccountForm.vue'
-import CashManagerButton from "@/components/core/CashManagerButton.vue";
-import CashManagerIcon from "@/components/ui/CashManagerIcon.vue";
-import TimeConfirmModal from "@/components/modals/TimeConfirmModal.vue";
-import {Ref, ref} from 'vue';
-import {useUsersStore} from "@/stores/usersStore.ts";
-import {User, UserCommand} from "@/services/UserService.ts";
-import {useAuthStore} from "@/stores/authStore.ts";
+import CashManagerButton from '@/components/core/CashManagerButton.vue'
+import TabBar from '@/components/navigations/TabBar.vue'
+import CashManagerIcon from '@/components/ui/CashManagerIcon.vue'
+import TimeConfirmModal from '@/components/modals/TimeConfirmModal.vue'
+import { Ref, ref } from 'vue'
+import { useUsersStore } from '@/stores/usersStore.ts'
+import { User, UserCommand } from '@/services/UserService.ts'
+import { useAuthStore } from '@/stores/authStore.ts'
 
 const user: Ref<User | null> = ref(useUsersStore().currentUser)
 const buttonLoading = ref(false)
@@ -69,7 +68,4 @@ const updateUser = async (user: UserCommand) => {
 
   buttonLoading.value = false
 }
-=======
-import TabBar from '@/components/navigations/TabBar.vue'
->>>>>>> 0b466e812c9c0d9bb763961c3234bfd6e11d6777
 </script>

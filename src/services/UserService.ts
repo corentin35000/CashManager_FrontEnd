@@ -59,7 +59,6 @@ export default class UserService extends BaseApiService {
 
   // Update a user
   static async updateUser(data: UserCommand, userId: number): Promise<User | ErrorResponse> {
-    console.log("user id", userId)
     return await this.put({
       url: `/user/${userId}`,
       data

@@ -26,12 +26,12 @@
 
         <div class="sm:col-span-9">
           <CashManagerInput
-              :value="user?.firstname || ''"
-              @update:value="user.firstname = $event"
-              type="text"
-              id="firstname"
-              rules="required"
-              placeholder="My firstname"
+            :value="user?.firstname || ''"
+            @update:value="user.firstname = $event"
+            type="text"
+            id="firstname"
+            rules="required"
+            placeholder="My firstname"
           />
         </div>
       </div>
@@ -52,7 +52,6 @@
           />
         </div>
       </div>
-
     </div>
     <div class="mt-5 flex justify-end gap-x-2">
       <CashManagerButton :disabled="!meta.valid" :load="props.buttonLoading" type="submit">
@@ -64,15 +63,11 @@
 <script lang="ts" setup>
 import CashManagerInput from '@/components/core/CashManagerInput.vue'
 import { Form } from 'vee-validate'
-import CashManagerIcon from '@/components/ui/CashManagerIcon.vue'
 import { useUsersStore } from '@/stores/usersStore'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-import {User} from "@/services/UserService.ts";
-import CashManagerButton from "@/components/core/CashManagerButton.vue";
-
-
-
+import { User } from '@/services/UserService.ts'
+import CashManagerButton from '@/components/core/CashManagerButton.vue'
 
 const defaultUser: User = {
   id: -1,
@@ -81,11 +76,10 @@ const defaultUser: User = {
   lastname: '',
   firstname: '',
   createdAt: new Date(0), // Set to Unix epoch as default
-  updatedAt: new Date(0),
-};
+  updatedAt: new Date(0)
+}
 
-const user: Ref<User> = ref(useUsersStore().currentUser || defaultUser);
-
+const user: Ref<User> = ref(useUsersStore().currentUser || defaultUser)
 
 /* PROPS */
 const props = defineProps({
@@ -99,7 +93,7 @@ const updateUser = () => {
   emits('submit', {
     lastname: user.value.lastname,
     firstname: user.value.lastname,
-    email: user.value.email,
+    email: user.value.email
   })
 }
 </script>
