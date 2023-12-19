@@ -15,6 +15,7 @@
     "run:stack:windows": "sh build-scripts/run-stack-windows.sh",
     "run:stack:unix": "sh build-scripts/run-stack-unix.sh",
     "tauri": "tauri",
+    "test:unit": "vitest run --coverage",
     "rust:install:target:android": "rustup target add aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android"
   },
   "dependencies": {
