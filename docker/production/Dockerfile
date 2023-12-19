@@ -72,13 +72,24 @@ RUN sdkmanager \
 
 # Install Rust and add targets for Android
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:$PATH"
 
-RUN chmod +x src-tauri/build.sh && \
-    npm run rust:install:target:android
-
-# Obligatoire de changer d'utilisateur pour les permission lors du build de l'app
+# Créer un nouvel utilisateur pour le processus de build
 RUN useradd -m monutilisateur
+
+# Changer la propriété de tous les fichiers et dossiers dans le répertoire courant pour le nouvel utilisateur
+RUN chown -R monutilisateur:monutilisateur .
+
+# Passer à l'utilisateur non-root
 USER monutilisateur
 
-RUN npm run build:tauri:android
+# Copier le répertoire .cargo dans le home de l'utilisateur monutilisateur
+RUN cp -R /root/.cargo /home/monutilisateur/ && \
+    chmod -R 755 /home/monutilisateur/.cargo
+
+# Mettre à jour le PATH pour le home de l'utilisateur monutilisateur
+ENV PATH="/home/monutilisateur/.cargo/bin:$PATH"
+
+# Continuer avec les commandes de build
+RUN chmod +x src-tauri/build.sh && \
+    npm run rust:install:target:android && \
+    npm run build:tauri:android
