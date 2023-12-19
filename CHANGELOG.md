@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.3.0](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.14...v1.3.0) (2023-12-19)
+
+
+### 🚀 Features
+
+* add config vitest in to config vite ([35fbb99](https://github.com/corentin35000/CashManager_FrontEnd/commit/35fbb99a4df3c76a70fd7b1f856713a9b26a6177))
+* add script npm for run tests unit ([b0b0c7d](https://github.com/corentin35000/CashManager_FrontEnd/commit/b0b0c7dd29f3d02f6acc462c35688e0cb3591b1a))
+
+
+### 🐛 Bug Fixes
+
+* ff ([06b22f6](https://github.com/corentin35000/CashManager_FrontEnd/commit/06b22f602f50a6d01363ce906121150b7b80504d))
+
+
+### 🧹 Chores
+
+* add dependencies vitest for tests unit ([475ecab](https://github.com/corentin35000/CashManager_FrontEnd/commit/475ecab577675737239e1de7ea05164da6d6868d))
+* add dependencies vitest for tests unit ([94020ac](https://github.com/corentin35000/CashManager_FrontEnd/commit/94020ace64b285c6ada1b05208c4e8bc316edfaa))
+* updating dependencies vite for vitest ([24eaac7](https://github.com/corentin35000/CashManager_FrontEnd/commit/24eaac7990f0b305bf0d50e71bf4a7deb4d395b6))
+
 ## [1.2.14](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.13...v1.2.14) (2023-12-19)
 
 
