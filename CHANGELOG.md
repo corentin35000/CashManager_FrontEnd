@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.10](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.9...v1.2.10) (2023-12-19)
+
+
+### 🐛 Bug Fixes
+
+* tes ([9d16087](https://github.com/corentin35000/CashManager_FrontEnd/commit/9d160875057cca1b22a7843d3c2ae43c3933a7fb))
+
 ## [1.2.9](https://github.com/corentin35000/CashManager_FrontEnd/compare/v1.2.8...v1.2.9) (2023-12-19)
 
 
