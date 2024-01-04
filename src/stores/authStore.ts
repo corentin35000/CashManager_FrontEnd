@@ -47,13 +47,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async signOut(): Promise<boolean> {
       return await useAppStore().execWithPending(async () => {
-        const response: { message: string } | ErrorResponse = await AuthService.signOut()
-        if ('errors' in response) {
-          const errorMessage = response?.errors?.[0]?.message || 'Failed to sign out.'
-          notify.error(errorMessage)
-          return false
-        }
-        await this.signOutLocal(response.message)
+        await this.signOutLocal()
         return true
       })
     }

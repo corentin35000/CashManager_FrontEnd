@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white bottom-0 left-1/2 dark:bg-gray-700"
-  >
+  <div class="fixed z-50 w-full h-16 bottom-0 bg-gray-700 border-t border-gray-600">
     <div class="grid h-full max-w-lg grid-cols-3 mx-auto">
       <router-link
         to="/"

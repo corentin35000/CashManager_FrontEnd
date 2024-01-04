@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col h-screen text-black">
-    <div class="flex-1 overflow-auto bg-gray-100 pb-16">
-      <h1 class="pt-2 mb-10 text-center text-2xl font-bold">Cart</h1>
-      <div class="mx-auto max-w-5xl px-6 md:flex md:space-x-6 xl:px-0">
+    <div class="flex-1 overflow-auto pb-16">
+      <h1 class="py-6 text-center text-2xl font-bold text-white">Cart</h1>
+      <div class="mx-auto md:flex md:space-x-6 xl:px-0 max-w-2xl px-2 sm:px-2 lg:max-w-7xl lg:px-6">
         <!-- Cart items section -->
         <div class="rounded-lg md:w-2/3">
           <div
@@ -53,15 +53,17 @@
           </div>
         </div>
         <!-- Summary section -->
-        <div class="rounded-lg border bg-white p-6 shadow-md md:w-1/3 mb-8">
+        <div
+          class="bg-slate-900 border border-gray-700 w-full grid gap-2 group relative rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
+        >
           <div class="mb-2 flex justify-between">
-            <p class="text-gray-700">Subtotal</p>
-            <p class="text-gray-700">{{ subtotal }}</p>
+            <p class="text-gray-300">Subtotal</p>
+            <p class="text-gray-300">{{ subtotal }}</p>
           </div>
-          <hr class="my-4" />
+          <hr class="my-4 border-gray-600" />
           <div class="flex justify-between">
-            <p class="text-lg font-bold">Total</p>
-            <p class="text-lg font-bold">{{ total }}</p>
+            <p class="text-lg font-semibold text-white">Total</p>
+            <p class="text-lg font-semibold text-white">{{ total }}</p>
           </div>
           <router-link to="payment-methods">
             <button class="w-full rounded-md bg-blue-500 py-1.5 text-blue-50 hover:bg-blue-600">

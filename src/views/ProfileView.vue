@@ -1,8 +1,10 @@
 <template>
   <div class="flex flex-col h-screen">
-    <div class="relative flex items-start">
+    <div class="mx-auto md:flex md:space-x-6 xl:px-0 max-w-2xl px-2 sm:px-2 lg:max-w-7xl lg:px-6">
       <div class="max-w-4xl px-0 py-4 sm:py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div class="rounded-xl shadow p-4 sm:p-7 bg-slate-900 border border-gray-700">
+        <div
+          class="bg-slate-900 border border-gray-700 w-full grid gap-2 group relative rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4"
+        >
           <div class="flex items-start flex-wrap justify-between mb-6 gap-2 md:gap-6">
             <div class="mb-8">
               <h2 class="text-xl font-bold text-gray-200">Profile</h2>
@@ -43,7 +45,6 @@ import TimeConfirmModal from '@/components/modals/TimeConfirmModal.vue'
 import { Ref, ref } from 'vue'
 import { useUsersStore } from '@/stores/usersStore.ts'
 import { User, UserCommand } from '@/services/UserService.ts'
-import { useAuthStore } from '@/stores/authStore.ts'
 
 const user: Ref<User | null> = ref(useUsersStore().currentUser)
 const buttonLoading = ref(false)
@@ -54,7 +55,6 @@ const deleteAccount = async () => {
   const _user = user.value
   if (_user) {
     await useUsersStore().deleteUser(_user.id)
-    await useAuthStore().signOutLocal()
   }
 
   buttonLoading.value = false

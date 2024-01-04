@@ -3,7 +3,7 @@
     :class="props.show ? 'opacity-100 z-50 top-20' : 'opacity-0 -z-10 top-16'"
     class="overflow-x-hidden overflow-y-auto fixed inset-0 outline-none transition-all focus:outline-none justify-center flex"
   >
-    <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+    <div class="relative p-2 sm:p-4 w-full max-w-2xl h-full md:h-auto">
       <!-- Modal content -->
       <div
         class="relative rounded-lg shadow"
