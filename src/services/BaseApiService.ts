@@ -51,13 +51,13 @@ export default class BaseApiService {
     }
   }
 
-  protected static async delete<T>(params: { url: string; data?: any }): Promise<T> {
+  protected static async delete<T>(params: { url: string }): Promise<T> {
     try {
-      const response = await this.client().delete(params.url, params.data)
+      const response = await this.client().delete(params.url)
       return response.data
     } catch (error) {
       const axiosError = error as AxiosError
-      return axiosError.response?.data as T
+      throw axiosError.response?.data as T
     }
   }
 }

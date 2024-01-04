@@ -13,9 +13,11 @@ import TabBar from '@/components/navigations/TabBar.vue'
 import { onMounted, ref } from 'vue'
 import { useProductStore } from '@/stores/productStore.ts'
 import { Product } from '@/services/ProductService.ts'
+import { useCartStore } from '@/stores/cartStore.ts'
 
 /* STORES */
 const productStore = useProductStore()
+const cartStore = useCartStore()
 
 /* REFS */
 const products = ref([] as Product[])
@@ -26,4 +28,8 @@ onMounted(async () => {
   products.value = productStore.products
   console.log(products.value)
 })
+
+/* Methods */
+
+cartStore.getCart()
 </script>

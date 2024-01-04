@@ -1,4 +1,5 @@
 import BaseApiService from '@/services/BaseApiService'
+import type { ErrorResponse } from '@/services/BaseApiService'
 import type { Product } from '@/services/ProductService.ts'
 
 // Types
@@ -16,14 +17,19 @@ export type Cart = {
   product: Product
 }
 
+export type updateCartProductQuantityCommand = {
+  product_id: number
+  quantity: number
+}
+
 export default class CartService extends BaseApiService {
   // Get cart
-  static async getCartByUserId(userId: number): Promise<Array<Cart>> {
+  static async getCartByUserId(userId: number): Promise<Array<Cart> | ErrorResponse> {
     return await this.get(`/cart/` + userId)
   }
 
   // Add product to cart
-  static async addProduct(userId: number, data: addProduct): Promise<void> {
+  static async addProduct(userId: number, data: addProduct): Promise<void | ErrorResponse> {
     return await this.post({
       url: `/cart/` + userId,
       data
@@ -32,11 +38,17 @@ export default class CartService extends BaseApiService {
 
   // Delete product from cart
   static async deleteProduct(userId: number, data: addProduct): Promise<void> {
-    return await this.delete({ url: `/cart/` + userId, data })
+    return await this.delete({ url: `/cart/` + userId + `/product/` + data.product_id })
   }
 
-  // Delete all cart from user
-  static async deleteAllCartFromUser(userId: number): Promise<void> {
-    return await this.delete({ url: `/cart/` + userId })
+  // Update product quantity
+  static async updateProductQuantity(
+    userId: number,
+    data: updateCartProductQuantityCommand
+  ): Promise<void> {
+    return await this.put({
+      url: `/cart/` + userId,
+      data
+    })
   }
 }
