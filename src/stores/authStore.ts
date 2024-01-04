@@ -21,7 +21,9 @@ export const useAuthStore = defineStore('auth', {
         })
       } catch (e) {
         console.error(e)
-        notify.error('Failed to sign in.')
+        const error = e as ErrorResponse
+        const errorMessage = error?.errors?.[0]?.message || 'Failed to sign in.'
+        notify.error(errorMessage)
         return false
       }
     },
@@ -33,8 +35,9 @@ export const useAuthStore = defineStore('auth', {
           notify.success('Signed up successfully!')
         })
       } catch (e) {
-        console.error(e)
-        notify.error('Failed to sign up')
+        const error = e as ErrorResponse
+        const errorMessage = error?.errors?.[0]?.message || 'Failed to sign up'
+        notify.error(errorMessage)
       }
     },
     async signOutLocal(message?: string): Promise<void> {
@@ -45,8 +48,9 @@ export const useAuthStore = defineStore('auth', {
     async signOut(): Promise<boolean> {
       return await useAppStore().execWithPending(async () => {
         const response: { message: string } | ErrorResponse = await AuthService.signOut()
-        if ('error' in response) {
-          notify.error(response.error || 'Failed to sign out.')
+        if ('errors' in response) {
+          const errorMessage = response?.errors?.[0]?.message || 'Failed to sign out.'
+          notify.error(errorMessage)
           return false
         }
         await this.signOutLocal(response.message)

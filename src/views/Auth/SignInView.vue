@@ -4,11 +4,8 @@
       <CashManagerLogo to="/signup" :size="56" large />
     </div>
     <SignInForm />
-    <p class="text-center text-white text-xl">or</p>
-    <CashManagerLink
-      class="text-sm text-white justify-center"
-      :link="{ name: 'signup', query: $route.query }"
-    >
+    <p class="text-center text-white text-sm">or</p>
+    <CashManagerLink class="text-sm justify-center" :link="{ name: 'signup', query: $route.query }">
       Create your Account
     </CashManagerLink>
   </div>

@@ -1,8 +1,11 @@
 import axios, { AxiosError } from 'axios'
 
 export type ErrorResponse = {
-  error: string
-  details?: string[]
+  errors: {
+    field: string
+    rule: string
+    message: string
+  }[]
 }
 
 export default class BaseApiService {
@@ -34,7 +37,7 @@ export default class BaseApiService {
       return response.data
     } catch (error) {
       const axiosError = error as AxiosError
-      return axiosError.response?.data as T
+      throw axiosError.response?.data as T
     }
   }
 
@@ -44,7 +47,7 @@ export default class BaseApiService {
       return response.data
     } catch (error) {
       const axiosError = error as AxiosError
-      return axiosError.response?.data as T
+      throw axiosError.response?.data as T
     }
   }
 

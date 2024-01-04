@@ -34,14 +34,14 @@
         type="password"
         id="password"
         label="Password"
-        rules="required"
+        rules="required|complex_password"
       />
       <CashManagerInput
         v-model:value="values.password_confirmation"
         type="password"
-        id="password"
-        label="Password Confirmation"
-        rules="required"
+        id="password_confirmation"
+        label="Confirm password"
+        rules="required|confirmed:@password"
       />
     </div>
     <CashManagerButton :disabled="!meta.valid" :load="buttonLoading" type="submit">
