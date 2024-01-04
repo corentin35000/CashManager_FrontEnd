@@ -59,14 +59,29 @@ export const useUsersStore = defineStore('user', {
       })
     },
     // Update an existing user
-    async updateUser(data: UserCommand): Promise<null | User | ErrorResponse> {
+    async updateUser(data: UserCommand): Promise<null | User> {
       return await useAppStore().execWithPending(async () => {
         const userId = this.currentUser?.id
         if (!userId) {
           notify.error('Failed to update user.')
           return null
         }
-        return await UserService.updateUser(data, userId)
+        try {
+          const response = await UserService.updateUser(data, userId)
+          if ('errors' in response) {
+            const errorMessage = response?.errors?.[0]?.message || 'Failed to update user.'
+            notify.error(errorMessage)
+            return null
+          }
+          notify.success('User updated successfully!')
+          useUsersStore().setCurrentUser(response)
+          return response
+        } catch (e) {
+          const error = e as ErrorResponse
+          const errorMessage = error?.errors?.[0]?.message || 'Failed to update user.'
+          notify.error(errorMessage)
+          return null
+        }
       })
     },
     // Delete a user by ID

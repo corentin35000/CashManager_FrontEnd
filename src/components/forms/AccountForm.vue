@@ -92,7 +92,7 @@ const emits = defineEmits(['submit'])
 const updateUser = () => {
   emits('submit', {
     lastname: user.value.lastname,
-    firstname: user.value.lastname,
+    firstname: user.value.firstname,
     email: user.value.email
   })
 }
