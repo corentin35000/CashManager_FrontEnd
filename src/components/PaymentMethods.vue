@@ -36,7 +36,7 @@
             />
             <label class="text-base font-medium ml-4 cursor-pointer">Cheque</label>
           </div>
-          <div v-show="selectedPaymentMethod === 'cheque'" class="grid grid-cols-2 gap-4 px-8 pb-8">
+          <div v-show="selectedPaymentMethod === 'cheque'" class="grid gap-4 px-8 pb-8">
             <QRCodeScanner />
           </div>
         </div>
