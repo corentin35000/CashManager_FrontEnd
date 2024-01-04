@@ -1,41 +1,40 @@
 <template>
   <div class="flex flex-col h-screen text-black">
-    <div class="flex-1 overflow-auto bg-gray-100 pb-16">
-      <h1 class="pt-2 mb-10 text-center text-2xl font-bold">Make payment</h1>
+    <div class="absolute left-3 top-3">
+      <PreviousButton @click="$router.push('/cart')" />
+    </div>
+    <div class="flex-1 overflow-auto pb-16 mt-10">
+      <h1 class="py-6 text-center text-2xl font-bold text-white">Make payment</h1>
 
-      <div class="border-t bg-white">
-        <div class="flex items-center px-8 py-5" @click="selectedPaymentMethod = 'creditCard'">
-          <input
-            class="appearance-none w-4 h-4 rounded-full border-2 border-white ring-2 ring-blue-600 ring-opacity-100"
-            :class="{ 'bg-blue-600': selectedPaymentMethod === 'creditCard' }"
-            type="radio"
-            value="creditCard"
-            v-model="selectedPaymentMethod"
-          />
-          <label class="text-sm font-medium ml-4">Credit Card</label>
-        </div>
+      <div class="border-t bg-slate-900 border-gray-700 text-white">
         <div
-          v-show="selectedPaymentMethod === 'creditCard'"
-          class="grid grid-cols-2 gap-4 px-8 pb-8"
+          class="flex items-center p-5 cursor-pointer select-none"
+          @click="selectedPaymentMethod = 'creditCard'"
         >
-          <div
-            v-show="selectedPaymentMethod === 'creditCard'"
-            class="grid grid-cols-2 gap-4 px-8 pb-8"
-          >
-            <StripeForm />
-          </div>
+          <RadioButton
+            :active="selectedPaymentMethod === 'creditCard'"
+            @update:active="
+              $event ? (selectedPaymentMethod = 'creditCard') : (selectedPaymentMethod = null)
+            "
+          />
+          <label class="text-base font-medium ml-4 cursor-pointer">Credit Card</label>
+        </div>
+        <div v-show="selectedPaymentMethod === 'creditCard'" class="grid gap-4 p-4">
+          <StripeForm />
         </div>
 
-        <div class="border-t bg-white">
-          <div class="flex items-center px-8 py-5" @click="selectedPaymentMethod = 'cheque'">
-            <input
-              class="appearance-none w-4 h-4 rounded-full border-2 border-white ring-2 ring-blue-600 ring-opacity-100"
-              :class="{ 'bg-blue-600': selectedPaymentMethod === 'cheque' }"
-              type="radio"
-              value="cheque"
-              v-model="selectedPaymentMethod"
+        <div class="border-t bg-slate-900 border-gray-700 text-white">
+          <div
+            class="flex items-center cursor-pointer select-none p-5"
+            @click="selectedPaymentMethod = 'cheque'"
+          >
+            <RadioButton
+              :active="selectedPaymentMethod === 'cheque'"
+              @update:active="
+                $event ? (selectedPaymentMethod = 'cheque') : (selectedPaymentMethod = null)
+              "
             />
-            <label class="text-sm font-medium ml-4">Cheque</label>
+            <label class="text-base font-medium ml-4 cursor-pointer">Cheque</label>
           </div>
           <div v-show="selectedPaymentMethod === 'cheque'" class="grid grid-cols-2 gap-4 px-8 pb-8">
             <QRCodeScanner />
@@ -53,6 +52,8 @@ import QRCodeScanner from '@/components/QRCodeScanner.vue'
 import StripeForm from '@/components/forms/StripeForm.vue'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
+import PreviousButton from '@/components/buttons/PreviousButton.vue'
+import RadioButton from '@/components/buttons/RadioButton.vue'
 
-const selectedPaymentMethod: Ref<string | null> = ref(null)
+const selectedPaymentMethod: Ref<string | null> = ref('creditCard')
 </script>

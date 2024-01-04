@@ -18,6 +18,7 @@
       <router-link
         to="/cart"
         class="inline-flex flex-col items-center justify-center px-5 hover:opacity-90 group"
+        :class="activeRoute === '/payment-methods' ? 'bg-gray-800' : ''"
         exact
         active-class="bg-gray-800"
         v-slot="{ isExactActive }"
@@ -27,7 +28,7 @@
           mode="stroke"
           :width="22"
           :height="22"
-          :color="isExactActive ? '#3b82f6' : '#9ca3af'"
+          :color="isExactActive || activeRoute === '/payment-methods' ? '#3b82f6' : '#9ca3af'"
         />
       </router-link>
       <router-link
@@ -50,4 +51,9 @@
 </template>
 <script setup lang="ts">
 import CashManagerIcon from '@/components/ui/CashManagerIcon.vue'
+import { useRoute } from 'vue-router'
+import { ref } from 'vue'
+
+const route = useRoute()
+const activeRoute = ref(route.path)
 </script>
