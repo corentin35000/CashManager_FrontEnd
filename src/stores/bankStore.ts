@@ -35,7 +35,7 @@ export const useBankStore = defineStore('bankStore', {
       setTimeout(async () => {
         notify.success(message)
         await useCartStore().getCart()
-        await router.push({ name: 'profile' })
+        await router.push({ name: 'profileView', params: { viewName: 'orders' } })
       }, 1500)
     },
     setBankDetails(bankDetails: Bank): void {

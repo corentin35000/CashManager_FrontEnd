@@ -39,6 +39,10 @@ import { onMounted, ref } from 'vue'
 import type { Ref } from 'vue'
 import CashManagerInput from '@/components/core/CashManagerInput.vue'
 import CashManagerButton from '@/components/core/CashManagerButton.vue'
+import { useRouter } from 'vue-router'
+
+/* HOOKS */
+const router = useRouter()
 
 /* REFS */
 const cardNumber = ref('')
@@ -106,11 +110,9 @@ const formatCVC = (value: string) => {
 }
 
 const handleSubmit = () => {
-  // Logique de soumission du formulaire
-  console.log('Form Submitted', {
-    cardNumber: cardNumber.value,
-    expiryDate: expiryDate.value,
-    cvc: cvc.value
+  router.push({
+    name: 'payment-secure',
+    params: { paymentMethod: 'card' }
   })
 }
 </script>

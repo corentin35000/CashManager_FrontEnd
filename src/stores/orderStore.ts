@@ -4,6 +4,7 @@ import OrderService from '@/services/OrderService'
 import type { Order, CreateOrderCommand } from '@/services/OrderService'
 import type { ErrorResponse } from '@/services/BaseApiService'
 import { useAppStore } from '@/stores/appStore.ts'
+import { useUsersStore } from '@/stores/usersStore.ts'
 
 export const useOrderStore = defineStore('orderStore', {
   state: () => ({
@@ -48,6 +49,12 @@ export const useOrderStore = defineStore('orderStore', {
           this.handleError(e, 'Failed to retrieve orders.')
         }
       })
+    },
+    async getCurrentUserOrders() {
+      const user = useUsersStore().currentUser
+      if (user) {
+        await this.getAllOrdersByUserId(user.id)
+      }
     }
   },
   getters: {}

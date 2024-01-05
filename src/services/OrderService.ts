@@ -1,5 +1,6 @@
 import BaseApiService from '@/services/BaseApiService'
 import type { ErrorResponse } from '@/services/BaseApiService'
+import type { Product } from '@/services/ProductService.ts'
 
 export type OrderStatus = 'pending' | 'paid' | 'cancelled'
 
@@ -8,8 +9,9 @@ export type OrderProduct = {
   order_id: number
   product_id: number
   quantity: number
-  createdAt: string
-  updatedAt: string
+  created_at: string
+  updated_at: string
+  product: Product
 }
 
 export type CreateOrderCommand = {
@@ -25,8 +27,8 @@ export type Order = {
   total_paid: number
   status: OrderStatus
   orderProducts: OrderProduct[]
-  createdAt: string
-  updatedAt: string
+  created_at: string
+  updated_at: string
 }
 
 export default class OrderService extends BaseApiService {

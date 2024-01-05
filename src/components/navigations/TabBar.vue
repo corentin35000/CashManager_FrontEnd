@@ -40,10 +40,11 @@
         </div>
       </router-link>
       <router-link
-        to="/profile"
+        to="/profile/account"
         class="inline-flex flex-col items-center justify-center px-5 hover:opacity-90 group"
         exact
         active-class="bg-gray-800"
+        :class="activeRoute.includes('profile') ? 'bg-gray-800' : ''"
         v-slot="{ isExactActive }"
       >
         <CashManagerIcon
@@ -51,7 +52,7 @@
           mode="stroke"
           :width="22"
           :height="22"
-          :color="isExactActive ? '#3b82f6' : '#9ca3af'"
+          :color="isExactActive || activeRoute.includes('profile') ? '#3b82f6' : '#9ca3af'"
         />
       </router-link>
     </div>

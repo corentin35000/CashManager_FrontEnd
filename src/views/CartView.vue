@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import TabBar from '@/components/navigations/TabBar.vue'
 import { useCartStore } from '@/stores/cartStore.ts'
-import CardArticle from '@/components/CardArticle.vue'
+import CardArticle from '@/components/cards/CardArticle.vue'
 import CashManagerLink from '@/components/core/CashManagerLink.vue'
 
 /* STORE */

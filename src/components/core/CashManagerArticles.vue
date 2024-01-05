@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import CardArticle from '@/components/CardArticle.vue'
+import CardArticle from '@/components/cards/CardArticle.vue'
 import { Product } from '@/services/ProductService.ts'
 import type { PropType } from 'vue'
 

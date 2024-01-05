@@ -4,7 +4,7 @@ import SignUpView from '@/views/Auth/SignUpView.vue'
 import CookieService from '@/services/CookieService.ts'
 import SignInView from '@/views/Auth/SignInView.vue'
 import CartView from '@/views/CartView.vue'
-import ProfileView from '@/views/ProfileView.vue'
+import ProfileView from '@/views/Profile/ProfileView.vue'
 import PaymentMethods from '@/components/PaymentMethods.vue'
 import ProductView from '@/views/Product/ProductView.vue'
 import PaymentSecureView from '@/views/Payment/PaymentSecureView.vue'
@@ -38,6 +38,11 @@ const router = createRouter({
         {
           path: 'profile',
           name: 'profile',
+          component: ProfileView
+        },
+        {
+          path: 'profile/:viewName',
+          name: 'profileView',
           component: ProfileView
         },
         {
