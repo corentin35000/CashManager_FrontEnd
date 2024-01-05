@@ -1,36 +1,66 @@
 import { defineStore } from 'pinia'
 import { notify } from '@/plugins/notyf.ts'
-import BankService, { Bank } from '@/services/BankService.ts'
-import CookieService from '@/services/CookieService.ts'
-import { User } from '@/services/UserService.ts'
+import BankService from '@/services/BankService'
+import type { Bank, PayByCheckCommand, PayByCardCommand } from '@/services/BankService'
+import type { ErrorResponse } from '@/services/BaseApiService'
+import { useAppStore } from '@/stores/appStore.ts'
 
 export const useBankStore = defineStore('bankStore', {
   state: () => ({
-    authorized: false
+    bankDetails: null as Bank | null
   }),
   actions: {
-    async checkIfHaveAmount(amount: number): Promise<void> {
-      try {
-        const user: User = JSON.parse(<string>CookieService.getCookie('user'))
-        const bank: Bank = await BankService.getBankByUserId(user.id)
-        this.authorized = bank.amount >= amount
-      } catch (error) {
-        console.error(error)
-        notify.error('error to pay')
-      }
+    handleError(e: unknown, message: string): void {
+      const error = e as ErrorResponse
+      const errorMessage = error?.errors?.[0]?.message || message
+      console.error(error)
+      notify.error(errorMessage)
     },
-    async useBankCheck(amount: number, bankCheckAmount: number): Promise<void> {
-      try {
-        if (bankCheckAmount >= amount) {
-          const user: User = JSON.parse(<string>CookieService.getCookie('user'))
-          const bank: Bank = await BankService.getBankByUserId(user.id)
-          this.authorized = bank.amount >= amount
+    setBankDetails(bankDetails: Bank): void {
+      this.bankDetails = bankDetails
+    },
+    async getBankDetails(userId: number): Promise<void> {
+      await useAppStore().execWithPending(async () => {
+        try {
+          const response = await BankService.getBankByUserId(userId)
+          if ('errors' in response) {
+            this.handleError(response, 'Failed to retrieve bank details.')
+            return
+          }
+          this.setBankDetails(response)
+        } catch (e) {
+          this.handleError(e, 'Failed to retrieve bank details.')
         }
-        this.authorized = false
-      } catch (error) {
-        console.error(error)
-        notify.error('error to pay')
-      }
+      })
+    },
+    async payByCheck(command: PayByCheckCommand): Promise<void> {
+      await useAppStore().execWithPending(async () => {
+        try {
+          const response = await BankService.payByCheck(command)
+          if ('errors' in response) {
+            this.handleError(response, 'Payment by check failed.')
+            return
+          }
+          notify.success(response.message)
+        } catch (e) {
+          this.handleError(e, 'Payment by check failed.')
+        }
+      })
+    },
+    async payByCard(command: PayByCardCommand): Promise<void> {
+      await useAppStore().execWithPending(async () => {
+        try {
+          const response = await BankService.payByCard(command)
+          if ('errors' in response) {
+            this.handleError(response, 'Payment by card failed.')
+            return
+          }
+          notify.success(response.message)
+        } catch (e) {
+          this.handleError(e, 'Payment by card failed.')
+        }
+      })
     }
-  }
+  },
+  getters: {}
 })
