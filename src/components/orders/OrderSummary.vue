@@ -42,7 +42,7 @@
           </div>
         </dl>
 
-        <CashManagerButton class="w-full mt-6"> Download invoice </CashManagerButton>
+        <DownloadInvoiceButton v-if="props.order.status === 'paid'" :order="props.order" />
       </div>
 
       <!--   ORDER LIST ITEMS      -->
@@ -58,13 +58,13 @@
 </template>
 
 <script lang="ts" setup>
-import CashManagerButton from '@/components/core/CashManagerButton.vue'
 import OrderItem from '@/components/orders/OrderItem.vue'
 import type { PropType } from 'vue'
 import type { Order } from '@/services/OrderService.ts'
 import { convertToReadableDateFormat, convertToSimpleDateFormat } from '@/utils/dateUtils.ts'
 import { convertCentsToEuros } from '@/utils/priceUtils.ts'
 import OrderStatusBadge from '@/components/orders/OrderStatusBadge.vue'
+import DownloadInvoiceButton from '@/components/orders/DownloadInvoiceButton.vue'
 
 /* PROPS */
 const props = defineProps({
