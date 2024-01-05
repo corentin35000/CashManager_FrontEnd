@@ -1,5 +1,5 @@
 import BaseApiService from '@/services/BaseApiService'
-import type { ErrorResponse } from '@/services/BaseApiService'
+import type { ErrorResponse, ExceptionResponse } from '@/services/BaseApiService'
 
 export type Bank = {
   id: number
@@ -29,14 +29,18 @@ export default class BankService extends BaseApiService {
     return await this.get(`/bank/` + userId)
   }
 
-  static async payByCheck(data: PayByCheckCommand): Promise<PaymentResponse | ErrorResponse> {
+  static async payByCheck(
+    data: PayByCheckCommand
+  ): Promise<PaymentResponse | ErrorResponse | ExceptionResponse> {
     return await this.post({
       url: '/bank/pay-by-check',
       data
     })
   }
 
-  static async payByCard(data: PayByCardCommand): Promise<PaymentResponse | ErrorResponse> {
+  static async payByCard(
+    data: PayByCardCommand
+  ): Promise<PaymentResponse | ErrorResponse | ExceptionResponse> {
     return await this.post({
       url: '/bank/pay-by-card',
       data

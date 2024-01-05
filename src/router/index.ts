@@ -7,6 +7,7 @@ import CartView from '@/views/CartView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import PaymentMethods from '@/components/PaymentMethods.vue'
 import ProductView from '@/views/Product/ProductView.vue'
+import PaymentSecureView from '@/views/Payment/PaymentSecureView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
           component: PaymentMethods
         },
         {
+          path: 'payment-secure/:paymentMethod',
+          name: 'payment-secure',
+          component: PaymentSecureView
+        },
+        {
           path: 'products',
           name: 'products',
           component: ProductView
@@ -66,16 +72,7 @@ router.beforeEach(
     _from: RouteLocationNormalized,
     next: NavigationGuardNext
   ) => {
-    const publicRoutes: string[] = [
-      'logout',
-      'signup',
-      'signin',
-      'app',
-      'payment-methods',
-      'cart',
-      'profile',
-      'not-found'
-    ]
+    const publicRoutes: string[] = ['logout', 'signup', 'signin', 'app', 'cart', 'not-found']
     if (to.name && publicRoutes.includes(to.name.toString())) {
       next()
     } else {

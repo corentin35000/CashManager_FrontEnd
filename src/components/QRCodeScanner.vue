@@ -3,12 +3,19 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import QRCodeScannerService from '@/services/QRCodeScannerService'
-import type { QrcodeResult } from 'html5-qrcode/src/core.ts'
+import { notify } from '@/plugins/notyf.ts'
+import { useRouter } from 'vue-router'
 
+/* DATAS */
 let qrCodeScannerService: QRCodeScannerService
+const notificationDelay = 2000 // 5 secondes
 
+/* REFS */
+let lastNotificationTime = ref(0)
+
+/* LIFECYCLE */
 onMounted(() => {
   qrCodeScannerService = new QRCodeScannerService(
     'qr-code-scanner-container',
@@ -23,15 +30,50 @@ onUnmounted(() => {
   qrCodeScannerService.stop()
 })
 
-const handleQRCodeSuccess = (decodedText: string, decodedResult: { result: QrcodeResult }) => {
-  // Gérer le résultat du scan ici
-  console.log(`QR Code décodé : ${decodedText}`, decodedResult)
+/* HOOKS */
+const router = useRouter()
+
+/* METHODS */
+const showNotification = (message: string, isError: boolean = true) => {
+  const currentTime = Date.now()
+  if (currentTime - lastNotificationTime.value > notificationDelay) {
+    lastNotificationTime.value = currentTime
+    notify.dismissAll()
+    if (isError) {
+      notify.error(message)
+    } else {
+      notify.success(message)
+    }
+  }
+}
+//https://www.qrcode-monkey.com/fr/#text
+
+// {
+//   "bankCheckBalance": 100
+// }
+
+const redirectToPaymentSecure = (bankCheckBalance?: number) => {
+  router.push({
+    name: 'payment-secure',
+    params: { paymentMethod: 'check' },
+    query: { bankCheckBalance }
+  })
 }
 
-const handleQRCodeError = (errorMessage: string) => {
-  // Gérer l'erreur ici
-  console.error(`Erreur lors du scan du QR Code : ${errorMessage}`)
+const handleQRCodeSuccess = (decodedText: string) => {
+  try {
+    const decodedObject = JSON.parse(decodedText)
+    if (decodedObject && typeof decodedObject === 'object' && 'bankCheckBalance' in decodedObject) {
+      redirectToPaymentSecure(decodedObject.bankCheckBalance)
+    } else {
+      showNotification('Invalid QR Code datas')
+    }
+  } catch (e) {
+    showNotification(`Invalid QR Code datas`)
+  }
 }
+
+const handleQRCodeError = () => {}
 </script>
 
 <style lang="scss">

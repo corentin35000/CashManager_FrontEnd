@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia'
 import { notify } from '@/plugins/notyf.ts'
 import BankService from '@/services/BankService'
-import type { Bank, PayByCheckCommand, PayByCardCommand } from '@/services/BankService'
-import type { ErrorResponse } from '@/services/BaseApiService'
+import type { Bank } from '@/services/BankService'
+import { ErrorResponse, ExceptionResponse } from '@/services/BaseApiService'
 import { useAppStore } from '@/stores/appStore.ts'
+import { User } from '@/services/UserService.ts'
+import { useUsersStore } from '@/stores/usersStore.ts'
+import router from '@/router'
+import { useCartStore } from '@/stores/cartStore.ts'
 
 export const useBankStore = defineStore('bankStore', {
   state: () => ({
@@ -11,10 +15,28 @@ export const useBankStore = defineStore('bankStore', {
   }),
   actions: {
     handleError(e: unknown, message: string): void {
-      const error = e as ErrorResponse
-      const errorMessage = error?.errors?.[0]?.message || message
+      const error: ErrorResponse | ExceptionResponse = e as ErrorResponse | ExceptionResponse
+      let errorMessage = message
+      if ('errors' in error) {
+        errorMessage = error.errors[0]?.message || message
+      } else if ('message' in error) {
+        errorMessage = error.message
+      }
       console.error(error)
       notify.error(errorMessage)
+    },
+    async handlePaymentError(e: unknown, message: string): Promise<void> {
+      setTimeout(async () => {
+        this.handleError(e, message)
+        await router.push({ name: 'payment-methods' })
+      }, 1500)
+    },
+    async handlePaymentSuccess(message: string): Promise<void> {
+      setTimeout(async () => {
+        notify.success(message)
+        await useCartStore().getCart()
+        await router.push({ name: 'profile' })
+      }, 1500)
     },
     setBankDetails(bankDetails: Bank): void {
       this.bankDetails = bankDetails
@@ -33,31 +55,43 @@ export const useBankStore = defineStore('bankStore', {
         }
       })
     },
-    async payByCheck(command: PayByCheckCommand): Promise<void> {
+    async payByCheck(bankCheckBalance: number): Promise<void> {
       await useAppStore().execWithPending(async () => {
         try {
-          const response = await BankService.payByCheck(command)
-          if ('errors' in response) {
-            this.handleError(response, 'Payment by check failed.')
+          const user: User | null = useUsersStore().currentUser
+          if (!user) {
+            notify.dismissAll()
+            notify.error('user not found')
             return
           }
-          notify.success(response.message)
+          const response = await BankService.payByCheck({ userId: user.id, bankCheckBalance })
+          if ('errors' in response) {
+            await this.handlePaymentError(response, 'Payment by check failed.')
+            return
+          }
+          await this.handlePaymentSuccess(response.message)
         } catch (e) {
-          this.handleError(e, 'Payment by check failed.')
+          await this.handlePaymentError(e, 'Payment by check failed.')
         }
       })
     },
-    async payByCard(command: PayByCardCommand): Promise<void> {
+    async payByCard(): Promise<void> {
       await useAppStore().execWithPending(async () => {
         try {
-          const response = await BankService.payByCard(command)
-          if ('errors' in response) {
-            this.handleError(response, 'Payment by card failed.')
+          const user: User | null = useUsersStore().currentUser
+          if (!user) {
+            notify.dismissAll()
+            notify.error('user not found')
             return
           }
-          notify.success(response.message)
+          const response = await BankService.payByCard({ userId: user.id })
+          if ('errors' in response) {
+            await this.handlePaymentError(response, 'Payment by card failed.')
+            return
+          }
+          await this.handlePaymentSuccess(response.message)
         } catch (e) {
-          this.handleError(e, 'Payment by card failed.')
+          await this.handlePaymentError(e, 'Payment by card failed.')
         }
       })
     }

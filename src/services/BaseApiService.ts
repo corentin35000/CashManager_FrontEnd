@@ -8,6 +8,10 @@ export type ErrorResponse = {
   }[]
 }
 
+export type ExceptionResponse = {
+  message: string
+}
+
 export default class BaseApiService {
   protected static apiUrl: string = import.meta.env.VITE_API_BASE_URL
 

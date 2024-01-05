@@ -54,6 +54,9 @@ import { ref } from 'vue'
 import type { Ref } from 'vue'
 import PreviousButton from '@/components/buttons/PreviousButton.vue'
 import RadioButton from '@/components/buttons/RadioButton.vue'
+import { useCartStore } from '@/stores/cartStore.ts'
 
 const selectedPaymentMethod: Ref<string | null> = ref('creditCard')
+
+useCartStore().getCart()
 </script>
