@@ -5,6 +5,7 @@ import AuthService from '@/services/AuthService'
 import { useUsersStore } from '@/stores/usersStore'
 import { useAppStore } from '@/stores/appStore'
 import router from '@/router'
+import { ErrorResponse } from '@/services/BaseApiService.ts'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({}),
@@ -20,7 +21,9 @@ export const useAuthStore = defineStore('auth', {
         })
       } catch (e) {
         console.error(e)
-        notify.error('Failed to sign in.')
+        const error = e as ErrorResponse
+        const errorMessage = error?.errors?.[0]?.message || 'Failed to sign in.'
+        notify.error(errorMessage)
         return false
       }
     },
@@ -32,14 +35,21 @@ export const useAuthStore = defineStore('auth', {
           notify.success('Signed up successfully!')
         })
       } catch (e) {
-        console.error(e)
-        notify.error('Failed to sign up')
+        const error = e as ErrorResponse
+        const errorMessage = error?.errors?.[0]?.message || 'Failed to sign up'
+        notify.error(errorMessage)
       }
     },
-    async signOut(message?: string): Promise<void> {
+    async signOutLocal(message?: string): Promise<void> {
       useUsersStore().setCurrentUser(null)
       notify.success(message || 'Signed out successfully!')
       await router.push({ name: 'signin' })
+    },
+    async signOut(): Promise<boolean> {
+      return await useAppStore().execWithPending(async () => {
+        await this.signOutLocal()
+        return true
+      })
     }
   },
   getters: {

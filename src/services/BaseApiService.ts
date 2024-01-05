@@ -1,8 +1,15 @@
 import axios, { AxiosError } from 'axios'
 
 export type ErrorResponse = {
-  error: string
-  details?: string[]
+  errors: {
+    field: string
+    rule: string
+    message: string
+  }[]
+}
+
+export type ExceptionResponse = {
+  message: string
 }
 
 export default class BaseApiService {
@@ -34,7 +41,7 @@ export default class BaseApiService {
       return response.data
     } catch (error) {
       const axiosError = error as AxiosError
-      return axiosError.response?.data as T
+      throw axiosError.response?.data as T
     }
   }
 
@@ -44,17 +51,17 @@ export default class BaseApiService {
       return response.data
     } catch (error) {
       const axiosError = error as AxiosError
-      return axiosError.response?.data as T
+      throw axiosError.response?.data as T
     }
   }
 
-  protected static async delete<T>(params: { url: string; data?: any }): Promise<T> {
+  protected static async delete<T>(params: { url: string }): Promise<T> {
     try {
-      const response = await this.client().delete(params.url, params.data)
+      const response = await this.client().delete(params.url)
       return response.data
     } catch (error) {
       const axiosError = error as AxiosError
-      return axiosError.response?.data as T
+      throw axiosError.response?.data as T
     }
   }
 }

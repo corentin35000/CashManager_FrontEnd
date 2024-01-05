@@ -5,11 +5,8 @@
     </div>
     <SignupForm />
 
-    <p class="text-center text-white text-xl">or</p>
-    <CashManagerLink
-      class="text-sm text-white justify-center mb-24 hover:underline hover:text-gray-300"
-      :link="{ name: 'signin', query: $route.query }"
-    >
+    <p class="text-center text-white text-sm">or</p>
+    <CashManagerLink class="text-sm justify-center" :link="{ name: 'signin', query: $route.query }">
       Connect to your Account
     </CashManagerLink>
   </div>

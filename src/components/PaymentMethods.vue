@@ -1,72 +1,62 @@
 <template>
-  <div class="flex flex-col h-screen">
-    <div class="flex-1 overflow-auto bg-gray-100 pb-16">
-      <h1 class="pt-2 mb-10 text-center text-2xl font-bold">Make payment</h1>
-
-      <div class="border-t bg-white">
-        <div class="flex items-center px-8 py-5" @click="selectedPaymentMethod = 'creditCard'">
-          <input
-            class="appearance-none w-4 h-4 rounded-full border-2 border-white ring-2 ring-blue-600 ring-opacity-100"
-            :class="{ 'bg-blue-600': selectedPaymentMethod === 'creditCard' }"
-            type="radio"
-            value="creditCard"
-            v-model="selectedPaymentMethod"
-          />
-          <label class="text-sm font-medium ml-4">Credit Card</label>
-        </div>
-        <div
-          v-show="selectedPaymentMethod === 'creditCard'"
-          class="grid grid-cols-2 gap-4 px-8 pb-8"
-        >
-          Scanner le NFC
-        </div>
-      </div>
-
-      <div class="border-t bg-white">
-        <div class="flex items-center px-8 py-5" @click="selectedPaymentMethod = 'cheque'">
-          <input
-            class="appearance-none w-4 h-4 rounded-full border-2 border-white ring-2 ring-blue-600 ring-opacity-100"
-            :class="{ 'bg-blue-600': selectedPaymentMethod === 'cheque' }"
-            type="radio"
-            value="cheque"
-            v-model="selectedPaymentMethod"
-          />
-          <label class="text-sm font-medium ml-4">Cheque</label>
-        </div>
-        <div v-show="selectedPaymentMethod === 'cheque'" class="grid grid-cols-2 gap-4 px-8 pb-8">
-          <QRCodeScanner />
-        </div>
-      </div>
-
-      <div class="border-t bg-white">
-        <div class="flex items-center px-8 py-5" @click="selectedPaymentMethod = 'stripe'">
-          <input
-            class="appearance-none w-4 h-4 rounded-full border-2 border-white ring-2 ring-blue-600 ring-opacity-100"
-            :class="{ 'bg-blue-600': selectedPaymentMethod === 'stripe' }"
-            type="radio"
-            value="stripe"
-            v-model="selectedPaymentMethod"
-          />
-          <label class="text-sm font-medium ml-4">Stripe</label>
-        </div>
-        <div v-show="selectedPaymentMethod === 'stripe'" class="grid grid-cols-2 gap-4 px-8 pb-8">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png"
-            alt="stripe"
-            class="w-40"
-          />
-        </div>
-      </div>
+  <div class="flex flex-col h-screen text-black">
+    <div class="absolute left-3 top-3">
+      <PreviousButton @click="$router.push('/cart')" />
     </div>
-    <TabBar></TabBar>
+    <div class="flex-1 overflow-auto pb-16 mt-10">
+      <h1 class="py-6 text-center text-2xl font-bold text-white">Make payment</h1>
+
+      <div class="border-t bg-slate-900 border-gray-700 text-white">
+        <div
+          class="flex items-center p-5 cursor-pointer select-none"
+          @click="selectedPaymentMethod = 'creditCard'"
+        >
+          <RadioButton
+            :active="selectedPaymentMethod === 'creditCard'"
+            @update:active="
+              $event ? (selectedPaymentMethod = 'creditCard') : (selectedPaymentMethod = null)
+            "
+          />
+          <label class="text-base font-medium ml-4 cursor-pointer">Credit Card</label>
+        </div>
+        <div v-show="selectedPaymentMethod === 'creditCard'" class="grid gap-4 p-4">
+          <StripeForm />
+        </div>
+
+        <div class="border-t bg-slate-900 border-gray-700 text-white">
+          <div
+            class="flex items-center cursor-pointer select-none p-5"
+            @click="selectedPaymentMethod = 'cheque'"
+          >
+            <RadioButton
+              :active="selectedPaymentMethod === 'cheque'"
+              @update:active="
+                $event ? (selectedPaymentMethod = 'cheque') : (selectedPaymentMethod = null)
+              "
+            />
+            <label class="text-base font-medium ml-4 cursor-pointer">Cheque</label>
+          </div>
+          <div v-show="selectedPaymentMethod === 'cheque'" class="grid gap-4 px-8 pb-8">
+            <QRCodeScanner />
+          </div>
+        </div>
+      </div>
+      <TabBar></TabBar>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import TabBar from '@/components/navigations/TabBar.vue'
 import QRCodeScanner from '@/components/QRCodeScanner.vue'
+import StripeForm from '@/components/forms/StripeForm.vue'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
+import PreviousButton from '@/components/buttons/PreviousButton.vue'
+import RadioButton from '@/components/buttons/RadioButton.vue'
+import { useCartStore } from '@/stores/cartStore.ts'
 
-const selectedPaymentMethod: Ref<string | null> = ref(null)
+const selectedPaymentMethod: Ref<string | null> = ref('creditCard')
+
+useCartStore().getCart()
 </script>

@@ -6,7 +6,8 @@
     :href="externalLink || to"
     :target="externalLink ? '_blank' : null"
     :class="[
-      isDisabled ? 'brightness-75 cursor-not-allowed' : `${hoverBgClass} active:translate-y-1`,
+      isDisabled ? 'brightness-75 cursor-not-allowed' : hoverBgClass,
+      !isDisabled && animate ? 'active:translate-y-1' : '',
       load ? 'cursor-wait' : '',
       sizeClasses,
       bgClass
@@ -29,6 +30,8 @@ const props = defineProps({
   to: { type: [String, Object], default: null },
   externalLink: { type: String, default: null },
   size: { type: String, default: null },
+  square: { type: Boolean, default: false },
+  animate: { type: Boolean, default: true },
   variant: { type: String, default: 'primary' } // primary, red, green, blue
 })
 
@@ -49,9 +52,9 @@ const isDisabled = computed(() => {
 const sizeClasses = computed(() => {
   switch (props.size) {
     case 'sm':
-      return 'py-1.5 px-4 text-xs'
+      return props.square ? 'p-2 text-xs' : 'py-1.5 px-4 text-xs'
     case 'md':
-      return 'py-2.5 px-6 text-sm'
+      return props.square ? 'px-5 py-2.5 text-sm' : 'py-2.5 px-6 text-sm'
     case 'lg':
       return 'py-3 px-8 text-base'
     case 'xl':

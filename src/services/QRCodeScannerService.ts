@@ -1,6 +1,7 @@
 import { Html5QrcodeScanner } from 'html5-qrcode'
+import type { QrcodeResult } from 'html5-qrcode/src/core.ts'
 
-type QRCodeSuccessCallback = (decodedText: string, decodedResult: any) => void
+type QRCodeSuccessCallback = (decodedText: string, decodedResult: { result: QrcodeResult }) => void
 type QRCodeErrorCallback = (errorMessage: string) => void
 
 export default class QRCodeScannerService {

@@ -30,8 +30,9 @@ export const useUsersStore = defineStore('user', {
     async getUser(userId: number): Promise<User | null> {
       return await useAppStore().execWithPending(async () => {
         const response: User | ErrorResponse = await UserService.getUser(userId)
-        if ('error' in response) {
-          notify.error(response.error || 'Failed to retrieve user.')
+        if ('errors' in response) {
+          const errorMessage = response?.errors?.[0]?.message || 'Failed to retrieve user.'
+          notify.error(errorMessage)
           return null
         }
         this.setCurrentUser(response)
@@ -42,8 +43,9 @@ export const useUsersStore = defineStore('user', {
     async getUsers(params?: { email?: string; username?: string }): Promise<Array<User>> {
       return await useAppStore().execWithPending(async () => {
         const response: Array<User> | ErrorResponse = await UserService.getUsers(params)
-        if ('error' in response) {
-          notify.error(response.error || 'Failed to retrieve users.')
+        if ('errors' in response) {
+          const errorMessage = response?.errors?.[0]?.message || 'Failed to retrieve user.'
+          notify.error(errorMessage)
           return []
         }
         this.setUsers(response)
@@ -57,14 +59,29 @@ export const useUsersStore = defineStore('user', {
       })
     },
     // Update an existing user
-    async updateUser(data: UserCommand): Promise<null | User | ErrorResponse> {
+    async updateUser(data: UserCommand): Promise<null | User> {
       return await useAppStore().execWithPending(async () => {
         const userId = this.currentUser?.id
         if (!userId) {
           notify.error('Failed to update user.')
           return null
         }
-        return await UserService.updateUser(data, userId)
+        try {
+          const response = await UserService.updateUser(data, userId)
+          if ('errors' in response) {
+            const errorMessage = response?.errors?.[0]?.message || 'Failed to update user.'
+            notify.error(errorMessage)
+            return null
+          }
+          notify.success('User updated successfully!')
+          useUsersStore().setCurrentUser(response)
+          return response
+        } catch (e) {
+          const error = e as ErrorResponse
+          const errorMessage = error?.errors?.[0]?.message || 'Failed to update user.'
+          notify.error(errorMessage)
+          return null
+        }
       })
     },
     // Delete a user by ID
@@ -82,8 +99,9 @@ export const useUsersStore = defineStore('user', {
     async getAnotherUser(userId: number): Promise<User | null> {
       return await useAppStore().execWithPending(async () => {
         const response: User | ErrorResponse = await UserService.getUser(userId)
-        if ('error' in response) {
-          notify.error(response.error || 'Failed to retrieve user.')
+        if ('errors' in response) {
+          const errorMessage = response?.errors?.[0]?.message || 'Failed to retrieve user.'
+          notify.error(errorMessage)
           return null
         }
         return response

@@ -35,14 +35,6 @@ export default class AuthService extends BaseApiService {
     })
   }
 
-  // Sign out the current user
-  static async signOut(): Promise<{ message: string } | ErrorResponse> {
-    return await this.post({
-      url: `/sign_out`,
-      data: null
-    })
-  }
-
   // Get the current user
   static async getCurrentUser(): Promise<User | ErrorResponse> {
     return await this.get(`/current_user`)
